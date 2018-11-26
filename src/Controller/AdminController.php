@@ -115,7 +115,7 @@ class AdminController extends Controller
     /**
      * @Route("/admin/media/delete/{id]", name="media_delete")
      */
-    public function deleteUser()
+    public function deleteMedia()
     {
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
