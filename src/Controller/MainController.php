@@ -40,7 +40,7 @@ class MainController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', 'Account created');
+            $this->addFlash('success', 'Compte créé avec succès');
             return $this->redirectToRoute('home');
         }
 

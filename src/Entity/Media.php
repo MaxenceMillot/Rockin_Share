@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
@@ -51,7 +52,7 @@ class Media
     private $extension;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Genre", inversedBy="typeMedia")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Genre", inversedBy="medias")
      * @ORM\JoinColumn(name="genre_id", referencedColumnName="id",  nullable=true)
      */
     private $genres;

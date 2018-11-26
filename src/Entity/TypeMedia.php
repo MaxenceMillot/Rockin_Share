@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TypeMediaRepository")
  */
@@ -22,7 +23,7 @@ class TypeMedia
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Genre", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="App\Entity\Genre", mappedBy="typeMedia")
      */
     private $genres;
 

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GenreRepository")
  */
@@ -27,7 +28,7 @@ class Genre
     private $medias;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TypeMedia", inversedBy="typeMedia")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeMedia", inversedBy="genres")
      * @ORM\JoinColumn(name="typeMedia_id", referencedColumnName="id",  nullable=true)
      */
     private $typeMedia;

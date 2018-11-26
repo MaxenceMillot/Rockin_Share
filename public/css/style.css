@@ -31,6 +31,10 @@ html body {
     font-family: 'Patua One', cursive;
 }
 
+form{
+    font-weight: bold;
+}
+
 .border-left-2 {
     border-left:solid black 2px !important;
 }
