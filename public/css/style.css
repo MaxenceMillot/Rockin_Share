@@ -10,3 +10,7 @@ html, body{
     /* But also accounting for potential margin-bottom of last child */
     margin-bottom: -20px;
 }
+
+.lobster{
+    font-family: 'Lobster', cursive;
+}
