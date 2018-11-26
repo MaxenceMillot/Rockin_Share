@@ -22,6 +22,10 @@ html body {
     opacity: 0.8 !important;
 }
 
+.card:after{
+    opacity: 1 !important;
+}
+
 .wrapper {
     min-height: 100%;
 
