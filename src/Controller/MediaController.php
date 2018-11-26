@@ -75,7 +75,6 @@ class MediaController extends Controller
      */
     public function deleteMyMedia()
     {
-        # TODO: authenticate user (self edit only)
         return $this->render('media/index.html.twig', [
             'controller_name' => 'MediaController',
         ]);

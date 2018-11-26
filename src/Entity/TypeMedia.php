@@ -21,6 +21,11 @@ class TypeMedia
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Genre", mappedBy="category")
+     */
+    private $genres;
+
     public function getId(): ?int
     {
         return $this->id;

@@ -21,6 +21,17 @@ class Genre
      */
     private $name;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Media", mappedBy="genres")
+     */
+    private $medias;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeMedia", inversedBy="typeMedia")
+     * @ORM\JoinColumn(name="typeMedia_id", referencedColumnName="id",  nullable=true)
+     */
+    private $typeMedia;
+
     public function getId(): ?int
     {
         return $this->id;

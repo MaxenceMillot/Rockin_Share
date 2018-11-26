@@ -50,6 +50,12 @@ class Media
      */
     private $extension;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Genre", inversedBy="typeMedia")
+     * @ORM\JoinColumn(name="genre_id", referencedColumnName="id",  nullable=true)
+     */
+    private $genres;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,5 +119,21 @@ class Media
         $this->extension = $extension;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGenre()
+    {
+        return $this->genres;
+    }
+
+    /**
+     * @param mixed $genre
+     */
+    public function setCategory($genre)
+    {
+        $this->genres = $genre;
     }
 }
