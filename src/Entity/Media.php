@@ -17,11 +17,20 @@ class Media
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Veuillez entre un nom")
+     * @Assert\Length(min="2", max="150",
+     *      minMessage="Minimum 2 caractères",
+     *      maxMessage="Maximum 150 caractères"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\Length(min="2", max="800",
+     *      minMessage="Minimum 2 caractères",
+     *      maxMessage="Maximum 800 caractères"
+     * )
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
@@ -32,7 +41,7 @@ class Media
     private $dateCreated;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 

@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Register | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mx-auto">
+
+            <div class="col-md-12 mx-auto text-center">
+                <h1>Create your account</h1>
+            </div>
+            <div class="col-md-6 mx-auto">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-success btn-lg" type="submit">Register</button>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
