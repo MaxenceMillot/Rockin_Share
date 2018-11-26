@@ -3,7 +3,7 @@ html, body{
     font-size: 100%;
 }
 html body {
-    background-image: url("../../public/img/bg.png");
+    background-image: url("bg.png");
     background-size: 100%;
     background-repeat: no-repeat;
 }
