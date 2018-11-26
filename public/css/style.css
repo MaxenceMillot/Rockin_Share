@@ -1,0 +1,12 @@
+html, body{
+    font-family: 'Nunito', sans-serif;
+    font-size: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+
+    /* Equal to height of footer */
+    /* But also accounting for potential margin-bottom of last child */
+    margin-bottom: -20px;
+}
