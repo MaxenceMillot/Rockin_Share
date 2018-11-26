@@ -27,6 +27,9 @@ html body {
 .lobster{
     font-family: 'Lobster', cursive;
 }
+.patua{
+    font-family: 'Patua One', cursive;
+}
 
 .border-left-2 {
     border-left:solid black 2px !important;
