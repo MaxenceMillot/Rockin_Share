@@ -58,7 +58,7 @@ class MediaController extends Controller
 
     ######### MY MEDIAS ############
     /**
-     * @Route("/my_media/list", name="myMedia_list")
+     * @Route("/user/media/list", name="myMedia_list")
      */
     public function listMyMedia()
     {
@@ -68,7 +68,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/my_media/detail/{id}", name="myMedia_detail")
+     * @Route("/user/media/detail/{id}", name="myMedia_detail")
      */
     public function detailMyMedia()
     {
@@ -78,7 +78,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/my_media/update/{id}", name="myMedia_update")
+     * @Route("/user/media/update/{id}", name="myMedia_update")
      */
     public function updateMyMedia()
     {
@@ -88,7 +88,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/my_media/delete/{id}", name="myMedia_update")
+     * @Route("/user/media/delete/{id}", name="myMedia_delete")
      */
     public function deleteMyMedia()
     {
