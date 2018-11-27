@@ -5,19 +5,15 @@
 {% block content %}
     <div class="container">
         <div class="row mx-auto">
-
-
             <div class="col-md-6 card mx-auto mt-3 mb-3 p-3">
-
                 <h1 class="text-center patua">Create your account</h1>
-
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
-                <button class="btn btn-success btn-lg" type="submit">Register</button>
+                <div class="text-center">
+                    <button class="btn btn-success btn-lg" type="submit">Register</button>
+                </div>
                 {{ form_end(form) }}
             </div>
-
         </div>
     </div>
-
 {% endblock %}
