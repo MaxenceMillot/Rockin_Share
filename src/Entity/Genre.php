@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -34,10 +33,6 @@ class Genre
      */
     private $typeMedia;
 
-    public function __construct() {
-        $this->medias = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -58,20 +53,32 @@ class Genre
     /**
      * @return mixed
      */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    /**
+     * @param mixed $medias
+     */
+    public function setMedias($medias)
+    {
+        $this->medias = $medias;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getTypeMedia()
     {
         return $this->typeMedia;
     }
 
     /**
-     * @return mixed $typeMedia
+     * @param mixed $typeMedia
      */
-    public function setTypeMedia(string $typeMedia)
+    public function setTypeMedia($typeMedia)
     {
         $this->typeMedia = $typeMedia;
-
-        return $this;
     }
-
-
 }

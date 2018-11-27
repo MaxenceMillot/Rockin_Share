@@ -48,4 +48,20 @@ class TypeMedia
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdeas()
+    {
+        return $this->genres;
+    }
+
+    /**
+     * @param mixed $genres
+     */
+    public function setIdeas($genres)
+    {
+        $this->genres = $genres;
+    }
 }

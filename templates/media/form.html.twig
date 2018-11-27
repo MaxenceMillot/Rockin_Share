@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Create Media | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mx-auto">
+            <div class="col-md-6 card mx-auto mt-3 mb-3 p-3">
+                <h1 class="text-center patua">Create your media</h1>
+                {{ form_start(form) }}
+
+                <div class="form-group">
+                    <label for="uploadedFile">File</label>
+                    <input type="file" class="form-control-file" id="uploadedFile" name="uploadedFile">
+                </div>
+
+                {{ form_widget(form) }}
+                <div class="text-center">
+                    <button class="btn btn-success btn-lg" type="submit">Add</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

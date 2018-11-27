@@ -48,6 +48,11 @@ class Utilisateur implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="utilisateur")
+     */
+    private $medias;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,6 +132,22 @@ class Utilisateur implements UserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    /**
+     * @param mixed $medias
+     */
+    public function setMedias($medias)
+    {
+        $this->medias = $medias;
     }
 
     public function getSalt()
