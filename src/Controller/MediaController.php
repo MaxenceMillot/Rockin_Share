@@ -88,11 +88,13 @@ class MediaController extends Controller
     /**
      * @Route("/user/media/list", name="myMedia_list")
      */
-    public function listMyMedia()
+    public function listMyMedia(EntityManagerInterface $em)
     {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
+        $repo = $em->getRepository(Media::class);
+
+        $listeMedias = $repo->findAll();
+
+        return $this->render("media/liste.html.twig",['listeMedias' => $listeMedias]);
     }
 
     /**
