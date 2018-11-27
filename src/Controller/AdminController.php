@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Genre;
+use App\Entity\TypeMedia;
 use App\Entity\Utilisateur;
 use App\Form\GenreType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -100,7 +102,7 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
 
     ############ GENRES #############
     /**
-     * @Route("/admin/genre/create", name="genre_create")
+     * @Route("/admin/genre/create/", name="genre_create")
      */
     public function createGenre(EntityManagerInterface $em, Request $request){
 
@@ -109,14 +111,11 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
         $formGenre = $this->createForm(GenreType::class, $genre);
         $formGenre->handleRequest($request);
 
-        dump($request);
-        die();
         if($formGenre->isSubmitted() && $formGenre->isValid()){
-
             $em->persist($genre);
             $em->flush();
 
-            $this->addFlash('success', 'Genre has been successfully created');
+            $this->addFlash('success', 'new Genre successfully created');
 
             return $this->redirectToRoute('genre_list');
         }
@@ -129,15 +128,31 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
     }
 
     /**
-     * @Route("/admin/genre/list", name="genre_list")
+     * @Route("/admin/genre/list/{id}", name="genre_list")
      */
-    public function genreList(EntityManagerInterface $em)
+    public function genreList(EntityManagerInterface $em, $id=null)
     {
-        $repo = $em->getRepository(Genre::class);
+        $repo_genre = $em->getRepository(Genre::class);
+        $repo_type = $em->getRepository(TypeMedia::class);
 
-        $list = $repo->findAll();
+        $genres = $repo_genre->findFirstTen($id);
+        $types = $repo_type->findAll();
 
-        return $this->render("genre/list.html.twig", ["genres"=>$list]);
+        return $this->render("genre/list.html.twig",
+            [
+                "genres"=>$genres,
+                "types"=>$types,
+                "idTypeMedia"=>$id
+            ]);
+    }
+
+    /**
+     * @Route("/admin/genre/list/filter/", name="genre_list_filter")
+     */
+    public function genreListFilter(Request $request)
+    {
+        $id = $request->request->get('filter');
+        return $this->redirectToRoute('genre_list', ['id' => $id], 301);
     }
 
     /**

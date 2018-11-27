@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +20,28 @@ class GenreRepository extends ServiceEntityRepository
         parent::__construct($registry, Genre::class);
     }
 
-    // /**
-    //  * @return Genre[] Returns an array of Genre objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('g.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function findFirstTen(int $id){
+        $em = $this->getEntityManager();
 
-    /*
-    public function findOneBySomeField($value): ?Genre
-    {
-        return $this->createQueryBuilder('g')
-            ->andWhere('g.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        /* DQL Method */
+        $dql = "SELECT genre FROM App\Entity\Genre AS genre INNER JOIN App\Entity\TypeMedia AS type WHERE genre.id = type.id AND type.id = :id";
+        $query = $em->createQuery($dql);
+
+        $query->setParameter('id', $id);
+
+        // Définition d'où je récupère mes lignes
+        $query->setFirstResult(0);
+
+        // Nombre de lignes récupèrées
+        $query->setMaxResults(10);
+
+        $paginator = new Paginator($query, $fetchJoinCollection = true);
+
+        $c = count($paginator);
+        foreach ($paginator as $post) {
+            echo $post->getHeadline() . "\n";
+        }
+
+        return $query->getResult();
     }
-    */
 }

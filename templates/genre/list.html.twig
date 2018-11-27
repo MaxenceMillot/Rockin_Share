@@ -1,76 +1,70 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Liste Genres | {{ parent() }}{% endblock %}
+{% block title %}Genre List | {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
 
             <div class="col-md-12 mx-auto text-center">
-                <h1 class="patua">Liste des Genres</h1>
+                <h1 class="patua mt-3">Genres List</h1>
+                <div class="form-group">
+
+                    <form action="{{ path('genre_list_filter') }}" method="post">
+                        <label for="filter_typeMedia">Types filter</label>
+                        <select class="form-control" id="filter_typeMedia" name="filter" onchange="this.form.submit();">
+                            {% for type in types %}
+                                {% if idTypeMedia == type.id %}
+                                    <option value="{{ type.id }}" selected>{{ type.name }}</option>
+                                {% else %}
+                                    <option value="{{ type.id }}">{{ type.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </form>
+
+                </div>
             </div>
 
-            <div class="col-md-4 mx-auto text-center">
-                <ul class="list-group list-group-flush">
+            <div class="col-md-6 mx-auto">
+                <table class="table table-hover bg-light">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     {% for genre in genres %}
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-8 text-left">{{ genre.name }}</div>
-                                <div class="col-md-2 text-right">
-                                    <a  href="{{ path('genre_update',{'id':genre.id}) }}">
-                                        <img src="{{ asset('img/edit.png') }}" width="32" alt="external_link">
+                        {% if idTypeMedia is not null and idTypeMedia == genre.typeMedia.id %}
+                            <tr>
+                                <td>{{ genre.name }}</td>
+                                <td>{{ genre.typeMedia.name }}</td>
+                                <td>
+                                    <a href="{{ path('user_detail',{'id':genre.id}) }}">
+                                        <img src="{{ asset('img/edit.png') }}" width="28" alt="view detail">
                                     </a>
-                                </div>
-                                <div class="col-md-2 text-right">
-                                    <a class="confirm-delete-genre-btn" data-id="{{ genre.id }}" data-toggle="modal" href="#confirm-delete-genre">
-                                        <img src="{{ asset('img/delete.png') }}" width="32" alt="external_link">
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if idTypeMedia is null %}
+                            <tr>
+                                <td>{{ genre.name }}</td>
+                                <td>{{ genre.typeMedia.name }}</td>
+                                <td>
+                                    <a href="{{ path('user_detail',{'id':genre.id}) }}">
+                                        <img src="{{ asset('img/edit.png') }}" width="28" alt="view detail">
                                     </a>
-                                </div>
-                            </div>
-                        </li>
-
+                                </td>
+                            </tr>
+                        {% endif %}
                     {% endfor %}
-                </ul>
+                    </tbody>
+                </table>
             </div>
 
-            <div class="col-md-12 mx-auto text-center mt-2 mb-2">
-                <a class="hvr-grow" href="{{ path('genre_create') }}">
-                    <img src="{{ asset('img/plus.png') }}" alt="add genre">
-                </a>
-            </div>
         </div>
     </div>
 
-    {# Modal #}
-    <div class="modal fade" id="confirm-delete-genre">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">x</button>
-                </div>
-                <div class="modal-body">
-                    Do you really want to delete this genre ?
-                </div>
-                <div class="modal-footer">
-                    <a id="confirm-delete-genre-link" href="" class="btn btn-success">Yes</a>
-                    <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-{% endblock %}
-
-{% block javascript %}
-<script>
-$( ".confirm-delete-genre-btn" ).click(function() {
-    var link = $( this );
-    var id = link.data("id");
-    $("#confirm-delete-genre-link").attr("href", "{{ path('genre_delete') }}/"+id);
-        console.log(id);
-
-    });
-</script>
 {% endblock %}
