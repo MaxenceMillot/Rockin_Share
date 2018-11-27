@@ -133,7 +133,7 @@ class Media
     /**
      * @param mixed $genre
      */
-    public function setCategory($genre)
+    public function setGenre($genre)
     {
         $this->genres = $genre;
     }

@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Genre;
 use App\Entity\Utilisateur;
-use App\Form\RegistrationType;
+use App\Form\GenreType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends Controller
 {
@@ -82,7 +82,7 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
      */
     public function userUpdate()
     {
-        return $this->render('admin/index.html.twig', [
+        return $this->render('utilisateur/update.html.twig', [
             'controller_name' => 'AdminController',
         ]);
     }
@@ -92,84 +92,52 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
      */
     public function deleteUser()
     {
-        return $this->render('admin/index.html.twig', [
+        return $this->render('user/delete.html.twig', [
             'controller_name' => 'AdminController',
         ]);
     }
 
-
-    ############ MEDIAS #############
-
-    /**
-     * @Route("/admin/media/create", name="media_create")
-     */
-    public function createMedia()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
-    /**
-     * @Route("/admin/media/list", name="media_list")
-     */
-    public function mediaList()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
-    /**
-     * @Route("/admin/media/detail/{id]", name="media_detail")
-     */
-    public function mediaDetail()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
-    /**
-     * @Route("/admin/media/update/{id]", name="media_update")
-     */
-    public function mediaUpdate()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
-
-    /**
-     * @Route("/admin/media/delete/{id]", name="media_delete")
-     */
-    public function deleteMedia()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
 
     ############ GENRES #############
-
     /**
      * @Route("/admin/genre/create", name="genre_create")
      */
-    public function createGenre()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+    public function createGenre(EntityManagerInterface $em, Request $request){
+
+        $genre = new Genre();
+
+        $formGenre = $this->createForm(GenreType::class, $genre);
+        $formGenre->handleRequest($request);
+
+        dump($request);
+        die();
+        if($formGenre->isSubmitted() && $formGenre->isValid()){
+
+            $em->persist($genre);
+            $em->flush();
+
+            $this->addFlash('success', 'Genre has been successfully created');
+
+            return $this->redirectToRoute('genre_list');
+        }
+
+
+        return $this->render('genre/create.html.twig',
+            [
+                'form' => $formGenre->createView()
+            ]);
     }
 
     /**
      * @Route("/admin/genre/list", name="genre_list")
      */
-    public function genreList()
+    public function genreList(EntityManagerInterface $em)
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        $repo = $em->getRepository(Genre::class);
+
+        $list = $repo->findAll();
+
+        return $this->render("genre/list.html.twig", ["genres"=>$list]);
     }
 
     /**
@@ -191,4 +159,7 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
             'controller_name' => 'AdminController',
         ]);
     }
+
+
+    ############ TYPES MEDIAS #############
 }

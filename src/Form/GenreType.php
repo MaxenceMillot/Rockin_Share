@@ -15,7 +15,7 @@ class GenreType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('Type de Media', EntityType::class, array(
+            ->add('typeMedia', EntityType::class, array(
                 'class' => TypeMedia::class,
                 'choice_label' => 'name',
             ))

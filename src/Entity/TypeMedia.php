@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -26,6 +27,10 @@ class TypeMedia
      * @ORM\OneToMany(targetEntity="App\Entity\Genre", mappedBy="typeMedia")
      */
     private $genres;
+
+    public function __construct() {
+        $this->genres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
