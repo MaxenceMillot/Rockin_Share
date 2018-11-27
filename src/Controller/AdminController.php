@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Genre;
+use App\Entity\Media;
 use App\Entity\TypeMedia;
 use App\Entity\Utilisateur;
 use App\Form\GenreType;
@@ -135,7 +136,7 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
         $repo_genre = $em->getRepository(Genre::class);
         $repo_type = $em->getRepository(TypeMedia::class);
 
-        $genres = $repo_genre->findFirstTen($id);
+        $genres = $repo_genre->findAll();
         $types = $repo_type->findAll();
 
         return $this->render("genre/list.html.twig",
@@ -158,21 +159,41 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
     /**
      * @Route("/admin/genre/update/{id]", name="genre_update")
      */
-    public function genreUpdate()
+    public function genreUpdate(EntityManagerInterface $em, $id=0)
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        $repo_genre = $em->getRepository(Genre::class);
+
+        $genre = $repo_genre->find($id);
+
+        return $this->render("genre/update.html.twig",
+            [
+                "genre"=>$genre,
+            ]);
     }
 
     /**
-     * @Route("/admin/genre/delete/{id]", name="genre_delete")
+     * @Route("/admin/genre/delete/{id}", name="genre_delete")
      */
-    public function deleteGenre()
+    public function deleteGenre(EntityManagerInterface $em, $id=0)
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        $repo = $em->getRepository(Genre::class);
+        $repo2 = $em->getRepository(Media::class);
+
+        $genre = $repo->find($id);
+        $medias = $repo2->findByGenre($id);
+
+        if(!$medias){
+            $em->remove($genre);
+            $em->flush();
+
+            $this->addFlash('success', "Genre has been successfully deleted");
+
+            return $this->redirectToRoute('genre_list');
+        }
+
+        $this->addFlash('danger', "Error: this type is used by some medias");
+        return $this->redirectToRoute('genre_list');
+
     }
 
 

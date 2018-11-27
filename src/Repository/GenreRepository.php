@@ -37,7 +37,6 @@ class GenreRepository extends ServiceEntityRepository
 
         $paginator = new Paginator($query, $fetchJoinCollection = true);
 
-        $c = count($paginator);
         foreach ($paginator as $post) {
             echo $post->getHeadline() . "\n";
         }

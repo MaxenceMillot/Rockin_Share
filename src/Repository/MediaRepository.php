@@ -36,15 +36,14 @@ class MediaRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Media
+    public function findByGenre($idGenre)
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
+            ->innerJoin('m.genres','g')
+            ->where('g.id = :id')
+            ->setParameter('id', $idGenre)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }
