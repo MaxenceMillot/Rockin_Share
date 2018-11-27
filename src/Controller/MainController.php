@@ -70,4 +70,19 @@ class MainController extends Controller
     public function logout(){
         // controller can be blank: it will never be executed!
     }
+
+    /**
+     * @Route("/user/account", name="user_account")
+     */
+    public function userAccount(){
+
+    }
+
+    /**
+     * @Route("/user/update", name="user_update")
+     */
+    public function userUpdate(){
+
+    }
+
 }

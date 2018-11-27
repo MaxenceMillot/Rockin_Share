@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
+use App\Form\RegistrationType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends Controller
 {
@@ -19,34 +24,59 @@ class AdminController extends Controller
 
 
 ############### USERS ##############
+/*
     /**
      * @Route("/admin/user/create", name="user_create")
-     */
-    public function createUser()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
-    }
+
+    public function createUser(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em){
+        $user = new Utilisateur();
+
+        $form = $this->createForm(RegistrationType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            // Crypter le MDP
+            $pass = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($pass);
+            $user->setRoles(['ROLE_USER']);
+
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', 'Account created');
+            return $this->redirectToRoute('home');
+        }
+
+return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
+
+}
+*/
 
     /**
      * @Route("/admin/user/list", name="user_list")
      */
-    public function userList()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+    public function userList(EntityManagerInterface $em){
+        $repo = $em->getRepository(Utilisateur::class);
+
+        $list = $repo->findAll();
+
+        return $this->render("utilisateur/list.html.twig", ['utilisateurs'=>$list]);
     }
 
     /**
      * @Route("/admin/user/detail/{id]", name="user_detail")
      */
-    public function userDetail()
-    {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+    public function userDetail(EntityManagerInterface $em, $id=0){
+        $repo = $em->getRepository(Utilisateur::class);
+
+        $idea = $repo->find($id);
+        /*
+                if($idea == null){
+                    throw
+                }
+        */
+        return $this->render('utilisateur/detail.html.twig', ['idea'=>$idea]);
     }
 
     /**

@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Liste des utilisateurs | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 mx-auto text-center">
+                <h1 class="patua">Utilisateurs</h1>
+            </div>
+
+            <div class="col-md-10 mx-auto">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Pseudo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for utilisateur in utilisateurs %}
+                        <tr>
+                            <td>{{ utilisateur.lastname }}</td>
+                            <td>{{ utilisateur.firstname }}</td>
+                            <td>{{ utilisateur.emaile }}</td>
+                            <td>{{ utilisateur.username }}</td>
+                            <td>
+                                <a href="{{ path('user_detail',{'id':utilisateur.id}) }}">
+                                    <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
