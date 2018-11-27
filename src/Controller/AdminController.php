@@ -17,9 +17,7 @@ class AdminController extends Controller
      */
     public function adminMenu()
     {
-        return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        return $this->render('admin/menu.html.twig');
     }
 
 

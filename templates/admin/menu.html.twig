@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mx-auto ">
+
+            <div class="col-md-12 bg-light border shadow rounded mt-3 p-3 text-center">
+                <h1 class="patua">Manage</h1>
+                <hr>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4  mt-2 text-center">
+                            <a href="{{ path('genre_list') }}" class="btn btn-lg btn-warning font-weight-bold">Genres</a>
+                        </div>
+
+                        <div class="col-md-4 mt-2 text-center">
+                            <a href="{{ path('media_list') }}" class="btn btn-lg btn-warning font-weight-bold">Medias</a>
+                        </div>
+
+                        <div class="col-md-4 mt-2 text-center">
+                            <a href="{{ path('user_list') }}" class="btn btn-lg btn-warning font-weight-bold">Users</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
