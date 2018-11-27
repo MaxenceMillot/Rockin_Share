@@ -28,21 +28,25 @@ class MediaController extends Controller
     public function createMedia(EntityManagerInterface $em,Request $request)
     {
         $media = new Media();
-        $formIdea = $this->createForm(MediaType::class,$media);
-        $media->setAuthor($this->getUser()->getUsername());
-
-        $formIdea->handleRequest($request);
-        if($formIdea->isSubmitted() && $formIdea->isValid())
+        $formMedia = $this->createForm(MediaType::class,$media);
+        $media->setUtilisateur($this->getUser());
+        $media->setDateCreated( new \DateTime());
+        $media->setExtension("");
+        $formMedia->handleRequest($request);
+        if($formMedia->isSubmitted() && $formMedia->isValid())
         {
-            $idea->setDateCreated( new \DateTime());
-            $em->persist($idea);
+            $filePath = $request->files->get('uploadedFile')->getClientOriginalName();
+            $arrayFile = array_values(explode('.', $filePath));
+            $extension = end($arrayFile);
+            $media->setExtension($extension);
+            $em->persist($media);
             $em->flush();
 
-            $this->addFlash('success',"L'idée a été ajoutée");
+            $this->addFlash('success',"The media has been created !");
 
-            return $this->redirectToRoute('idea_list');
+            return $this->redirectToRoute('media_list');
         }
-        return $this->render('idea/formIdea.html.twig',['formIdea' => $formIdea->createView()]);
+        return $this->render('media/form.html.twig',['form' => $formMedia->createView()]);
     }
 
     /**

@@ -49,4 +49,36 @@ class Genre
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
+
+    /**
+     * @param mixed $medias
+     */
+    public function setMedias($medias)
+    {
+        $this->medias = $medias;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTypeMedia()
+    {
+        return $this->typeMedia;
+    }
+
+    /**
+     * @param mixed $typeMedia
+     */
+    public function setTypeMedia($typeMedia)
+    {
+        $this->typeMedia = $typeMedia;
+    }
 }

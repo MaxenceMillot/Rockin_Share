@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
  */
-class Media
+class Media implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -56,6 +57,12 @@ class Media
      * @ORM\JoinColumn(name="genre_id", referencedColumnName="id",  nullable=true)
      */
     private $genres;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Utilisateur", inversedBy="medias")
+     * @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id",  nullable=true)
+     */
+    private $utilisateur;
 
     public function getId(): ?int
     {
@@ -133,8 +140,49 @@ class Media
     /**
      * @param mixed $genre
      */
-    public function setCategory($genre)
+    public function setGenre($genre)
     {
         $this->genres = $genre;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+
+    /**
+     * @param mixed $utilisateur
+     */
+    public function setUtilisateur($utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+    }
+
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
+
+    public function getPassword()
+    {
+        // TODO: Implement getPassword() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername()
+    {
+        // TODO: Implement getUsername() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
