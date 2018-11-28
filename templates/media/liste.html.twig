@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Liste des médias | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row ">
+
+            <div class="col-md-12 mx-auto text-center">
+                <h1 class="patua">Media</h1>
+            </div>
+
+            <div class="col-md-10 mx-auto">
+                <table class="table table-hover bg-light">
+                    <thead class="thead-dark">
+                    <tr class="text-center" >
+                        <th scope="col" style="width: 15%">Picture</th>
+                        <th scope="col" style="width: 50%">Name</th>
+                        <th scope="col" style="width: 25%">Type</th>
+                        <th scope="col" style="width: 10%">Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for media in listeMedias %}
+                        <tr class="text-center" id="table-media">
+                            <td><img src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}"> </td>
+                            <td class="font-weight-bold">{{ media.name }}</td>
+                            {% set genres = media.getGenre().getValues() %}
+                            {% set count = 0 %}
+                            {% for genre in genres if count == 0 %}
+                                <td>{{ genre.typeMedia.name }}</td>
+                                {% set count = 1 %}
+                            {% endfor %}
+                            <td>
+                                <a href="{{ path('user_detail',{'id':media.id}) }}">
+                                    <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

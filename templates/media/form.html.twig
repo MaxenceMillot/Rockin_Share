@@ -15,6 +15,7 @@
                 </div>
 
                 {{ form_widget(form) }}
+                <small class="form-text text-muted">Vous pouvez ajouter plusieurs genres en maintenant la touche 'Ctrl' appuyée</small>
                 <div class="text-center">
                     <button class="btn btn-success btn-lg" type="submit">Add</button>
                 </div>
@@ -22,4 +23,33 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        var $typeMedia = $('#media_typeMedia');
+        // When sport gets selected ...
+        $typeMedia.change(function() {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            data[$typeMedia.attr('name')] = $typeMedia.val();
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+                success: function(html) {
+                    // Replace current position field ...
+                    $('#media_genre').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#media_genre')
+                    );
+                    // Position field now displays the appropriate positions.
+                }
+            });
+        });
+    </script>
 {% endblock %}

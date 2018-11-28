@@ -2,9 +2,51 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9dc3ff28-7251-4236-9162-7923956c7176" name="Default Changelist" comment="finished typeMedia CRUD">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/utilisateur/detail.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/utilisateur/detail.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/utilisateur/update.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/utilisateur/update.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/routes/media.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/18mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/21.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/22.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/23.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/24.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/25.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/26.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/medias/27.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/05c114645e0901a6fab245427efd77a1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/065df68bb9cfd265d620f1d7dc97bf69.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/1010901283233c58c9e1f0159015674e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/13ebc8bbf55311bc98373f43cc25718f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/22684b6278936baa185debfb9b16c67b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/3c02b185eecd601f4951e7219265dbc5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/3ec324b657973883ff851cb2725fe0e7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/43d6c54392237ed64a31f60ccbfb749f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/4da1c1a05b3f51eedf39894dbcbdaabe.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/6a7b0abec0c186c0b24ec7b5847860c2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/719e6c184024ba4b48782900894e19d2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/738dd750536f4468220ddac0ffa18935.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/7d5f69cd34a4a052d514230d8b4ac107.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/80ad16f9c80c8b09f35bbc80fdcd722e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/a9f124956a549f62959f8aeb245fde20.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/bb27c14b726a2c4b6d23536571e97c19.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/dcbd99fac2e96e3811bc559dcf3518c8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/de60d7889bf1fb2681cef331c90780fc.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/e46091b4b6b0e7b46e19e7a9ef7a0565.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/e8b51f127554b4eaeb3be237ceab22a1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/f42cb3f5af81c776476a7bc6f9dc74c0.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/files/pictures/fdd604e5c46293b309df87903669aa5a.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Rockin' Share.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Rockin' Share.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MediaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MediaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Media.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Media.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TypeMedia.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TypeMedia.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/MediaType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MediaType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/GenreRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GenreRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/media/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/media/form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/media/liste.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/media/liste.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +90,7 @@
           <entry key="js" value="1" />
           <entry key="log" value="1" />
           <entry key="md" value="1" />
-          <entry key="php" value="72" />
+          <entry key="php" value="73" />
           <entry key="png" value="1" />
           <entry key="svg" value="4" />
           <entry key="twig" value="57" />
@@ -62,7 +104,7 @@
           <entry key="Image" value="1" />
           <entry key="JavaScript" value="1" />
           <entry key="Markdown" value="1" />
-          <entry key="PHP" value="72" />
+          <entry key="PHP" value="73" />
           <entry key="PLAIN_TEXT" value="4" />
           <entry key="SVG" value="4" />
           <entry key="Twig" value="57" />
@@ -121,11 +163,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="54" lean-forward="true" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+            <state relative-caret-position="357">
+              <caret line="21" column="70" lean-forward="true" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Repository/GenreRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -151,12 +202,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/MediaController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1360">
-              <caret line="113" column="51" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
+            <state relative-caret-position="1683">
+              <caret line="126" column="51" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
               <folding>
-                <element signature="e#2847#2870#0#PHP" expanded="true" />
-                <element signature="e#3101#3124#0#PHP" expanded="true" />
-                <element signature="e#3355#3378#0#PHP" expanded="true" />
+                <element signature="e#34#55#0#PHP" expanded="true" />
+                <element signature="e#843#866#0#PHP" expanded="true" />
+                <element signature="e#2625#2647#0#PHP" expanded="true" />
+                <element signature="e#2863#2886#0#PHP" expanded="true" />
+                <element signature="e#3273#3296#0#PHP" expanded="true" />
+                <element signature="e#3494#3517#0#PHP" expanded="true" />
+                <element signature="e#3748#3771#0#PHP" expanded="true" />
+                <element signature="e#4002#4025#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,7 +221,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/AccountController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
+            <state relative-caret-position="354">
               <caret line="58" selection-start-line="58" selection-end-line="58" />
               <folding>
                 <element signature="e#34#55#0#PHP" expanded="true" />
@@ -190,18 +246,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
               <caret line="37" column="57" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Utilisateur.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-              <folding>
-                <element signature="e#30#62#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -290,7 +334,6 @@
         <option value="$PROJECT_DIR$/src/Form/RegistrationType.php" />
         <option value="$PROJECT_DIR$/templates/type/create.html.twig" />
         <option value="$PROJECT_DIR$/src/Repository/TypeMediaRepository.php" />
-        <option value="$PROJECT_DIR$/src/Repository/GenreRepository.php" />
         <option value="$PROJECT_DIR$/templates/genre/list.html.twig" />
         <option value="$PROJECT_DIR$/templates/type/list.html.twig" />
         <option value="$PROJECT_DIR$/templates/admin/menu.html.twig" />
@@ -307,6 +350,7 @@
         <option value="$PROJECT_DIR$/src/Controller/MediaController.php" />
         <option value="$PROJECT_DIR$/templates/utilisateur/detail.html.twig" />
         <option value="$PROJECT_DIR$/templates/utilisateur/update.html.twig" />
+        <option value="$PROJECT_DIR$/src/Repository/GenreRepository.php" />
       </list>
     </option>
   </component>
@@ -582,7 +626,7 @@
       <workItem from="1543398163413" duration="3729000" />
       <workItem from="1543401954803" duration="1430000" />
       <workItem from="1543403807663" duration="143000" />
-      <workItem from="1543403984985" duration="11082000" />
+      <workItem from="1543403984985" duration="12388000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1543224855200</created>
@@ -847,7 +891,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67493000" />
+    <option name="totallyTimeSpent" value="68799000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1087,13 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/GenreRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/main/home.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1204,18 +1241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/MediaController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="113" column="51" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
-          <folding>
-            <element signature="e#2847#2870#0#PHP" expanded="true" />
-            <element signature="e#3101#3124#0#PHP" expanded="true" />
-            <element signature="e#3355#3378#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="643">
@@ -1245,9 +1270,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="70" lean-forward="true" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/MediaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="126" column="51" selection-start-line="126" selection-start-column="51" selection-end-line="126" selection-end-column="51" />
+          <folding>
+            <element signature="e#34#55#0#PHP" expanded="true" />
+            <element signature="e#843#866#0#PHP" expanded="true" />
+            <element signature="e#2625#2647#0#PHP" expanded="true" />
+            <element signature="e#2863#2886#0#PHP" expanded="true" />
+            <element signature="e#3273#3296#0#PHP" expanded="true" />
+            <element signature="e#3494#3517#0#PHP" expanded="true" />
+            <element signature="e#3748#3771#0#PHP" expanded="true" />
+            <element signature="e#4002#4025#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/AccountController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
+        <state relative-caret-position="354">
           <caret line="58" selection-start-line="58" selection-end-line="58" />
           <folding>
             <element signature="e#34#55#0#PHP" expanded="true" />
@@ -1257,13 +1309,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
+    <entry file="file://$PROJECT_DIR$/src/Repository/GenreRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="54" lean-forward="true" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+        <state relative-caret-position="660">
+          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
         </state>
       </provider>
     </entry>

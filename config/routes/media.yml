@@ -1,0 +1,4 @@
+media_list_genres:
+    path:     /get-genres-from-typeMedia
+    defaults: { _controller: "AppBundle:Media:listGenreOfTypeMedia" }
+    methods:  GET

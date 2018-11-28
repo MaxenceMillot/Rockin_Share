@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Genre;
 use App\Entity\Media;
 use App\Form\MediaType;
+use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MediaController extends Controller
@@ -16,11 +20,13 @@ class MediaController extends Controller
     /**
      * @Route("/media/list", name="media_list")
      */
-    public function listMedia()
+    public function listMedia(EntityManagerInterface $em)
     {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
+        $repo = $em->getRepository(Media::class);
+
+        $listeMedias = $repo->findAll();
+
+        return $this->render("media/liste.html.twig",['listeMedias' => $listeMedias]);
     }
 
     /**
@@ -28,14 +34,15 @@ class MediaController extends Controller
      */
     public function createMedia(EntityManagerInterface $em,Request $request)
     {
+
+
         $media = new Media();
         $formMedia = $this->createForm(MediaType::class,$media);
         $media->setUtilisateur($this->getUser());
         $media->setDateCreated( new \DateTime());
         $media->setExtension("");
         $formMedia->handleRequest($request);
-        if($formMedia->isSubmitted() && $formMedia->isValid())
-        {
+        if ($formMedia->isSubmitted() && $formMedia->isValid()) {
             $file = $request->files->get('uploadedFile');
             $fileExtension = $file->getClientOriginalExtension();
 
@@ -70,7 +77,11 @@ class MediaController extends Controller
 
             return $this->redirectToRoute('media_list');
         }
-        return $this->render('media/form.html.twig',['form' => $formMedia->createView()]);
+
+        return $this->render(
+            'media/form.html.twig',
+            array('form' => $formMedia->createView())
+        );
     }
 
     /**
@@ -88,11 +99,13 @@ class MediaController extends Controller
     /**
      * @Route("/account/mymedia/list", name="myMedia_list")
      */
-    public function listMyMedia()
+    public function listMyMedia(EntityManagerInterface $em)
     {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
+        $repo = $em->getRepository(Media::class);
+
+        $listeMedias = $repo->findByUtilisateur();
+
+        return $this->render("media/liste.html.twig",['listeMedias' => $listeMedias]);
     }
 
     /**
@@ -134,4 +147,5 @@ class MediaController extends Controller
         // uniqid(), which is based on timestamps
         return md5(uniqid());
     }
+
 }
