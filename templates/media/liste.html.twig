@@ -17,7 +17,7 @@
                         <th scope="col" style="width: 15%">Picture</th>
                         <th scope="col" style="width: 50%">Name</th>
                         <th scope="col" style="width: 25%">Type</th>
-                        <th scope="col" style="width: 10%">Edit</th>
+                        <th scope="col" style="width: 10%">view</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,6 +40,12 @@
                     {% endfor %}
                     </tbody>
                 </table>
+            </div>
+
+            <div class="col-md-12 mx-auto text-center mt-2 mb-2">
+                <a class="hvr-grow" href="{{ path('genre_create') }}">
+                    <img width="80" src="{{ asset('img/plus.svg') }}" alt="add">
+                </a>
             </div>
 
         </div>
