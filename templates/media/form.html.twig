@@ -23,3 +23,39 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $('#appbundle_media_typeMedia').change(function () {
+            var typeMediaSelector = $(this);
+
+            // Request the genres of the selected typeMedia.
+            $.ajax({
+                url: "{{ path('media_list_genres') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    typeMediaId: typeMediaSelector.val()
+                },
+                success: function (genres) {
+                    var genresSelect = $("#appbundle_media_genres");
+
+                    // Remove current options
+                    genresSelect.html('');
+
+                    // Empty value ...
+                    genresSelect.append('<option value> Select a genre of ' + typeMediaSelector.find("option:selected").text() + ' ...</option>');
+
+
+                    $.each(genres, function (key, genre) {
+                        genresSelect.append('<option value="' + genre.id + '">' + genre.name + '</option>');
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
+                }
+            });
+        });
+    </script>
+{% endblock %}
