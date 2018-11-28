@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * @UniqueEntity("email")
+ * @UniqueEntity("username")
  */
 class Utilisateur implements UserInterface
 {
@@ -49,7 +52,7 @@ class Utilisateur implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="utilisateur", cascade={"persist", "remove"})
      */
     private $medias;
 

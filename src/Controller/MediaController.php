@@ -97,7 +97,7 @@ class MediaController extends Controller
 
     ######### MY MEDIAS ############
     /**
-     * @Route("/user/media/list", name="myMedia_list")
+     * @Route("/account/mymedia/list", name="myMedia_list")
      */
     public function listMyMedia(EntityManagerInterface $em)
     {
@@ -109,7 +109,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/user/media/detail/{id}", name="myMedia_detail")
+     * @Route("/account/mymedia/detail/{id}", name="myMedia_detail")
      */
     public function detailMyMedia()
     {
@@ -119,7 +119,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/user/media/update/{id}", name="myMedia_update")
+     * @Route("/account/mymedia/update/{id}", name="myMedia_update")
      */
     public function updateMyMedia()
     {
@@ -129,7 +129,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/user/media/delete/{id}", name="myMedia_delete")
+     * @Route("/account/mymedia/delete/{id}", name="myMedia_delete")
      */
     public function deleteMyMedia()
     {

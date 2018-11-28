@@ -44,11 +44,23 @@ class GenreRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findByTypeMedia($idType){
+    public function findOneOrNullByTypeMedia($idType)
+    {
         return $this->createQueryBuilder('g')
             ->innerJoin('g.typeMedia','type')
             ->where('type.id = :id')
-            ->setParameter('id',$idType)
+            ->setParameter('id', $idType)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function findByTypeMedia($idType)
+    {
+        return $this->createQueryBuilder('g')
+            ->innerJoin('g.typeMedia','type')
+            ->where('type.id = :id')
+            ->setParameter('id', $idType)
             ->getQuery()
             ->getResult()
             ;

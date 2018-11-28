@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Update user | {{ parent() }}{% endblock %}
+{% block title %}Update Genre | {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -9,9 +9,6 @@
                 <h1 class="text-center patua">Edit Type</h1>
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
-                {% if is_granted('ROLE_ADMIN') %}
-                   {#TODO #} change role
-                {% endif %}
                 <div class="text-center">
                     <button class="btn btn-success btn-lg" type="submit">Update</button>
                 </div>

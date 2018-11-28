@@ -1,19 +1,16 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Update user | {{ parent() }}{% endblock %}
+{% block title %}Create media Type | {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row mx-auto">
             <div class="col-md-6 card mx-auto mt-3 p-2">
-                <h1 class="text-center patua">Edit Type</h1>
+                <h1 class="text-center patua">Create a new media Type</h1>
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
-                {% if is_granted('ROLE_ADMIN') %}
-                   {#TODO #} change role
-                {% endif %}
                 <div class="text-center">
-                    <button class="btn btn-success btn-lg" type="submit">Update</button>
+                    <button class="btn btn-success btn-lg" type="submit">Create</button>
                 </div>
                 {{ form_end(form) }}
             </div>

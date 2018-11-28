@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Media;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -40,8 +42,8 @@ class MainController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', 'Compte créé avec succès');
-            return $this->redirectToRoute('home');
+            $this->addFlash('success', 'Account created');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
@@ -70,19 +72,4 @@ class MainController extends Controller
     public function logout(){
         // controller can be blank: it will never be executed!
     }
-
-    /**
-     * @Route("/user/account", name="user_account")
-     */
-    public function userAccount(){
-
-    }
-
-    /**
-     * @Route("/user/update", name="user_update")
-     */
-    public function userUpdate(){
-
-    }
-
 }

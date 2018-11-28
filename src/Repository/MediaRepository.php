@@ -36,7 +36,7 @@ class MediaRepository extends ServiceEntityRepository
     }
     */
 
-    public function findByGenre($idGenre)
+    public function findOneOrNullByGenre($idGenre)
     {
         return $this->createQueryBuilder('m')
             ->innerJoin('m.genres','g')
@@ -45,5 +45,27 @@ class MediaRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    public function findOneOrNullByUser($idUser)
+    {
+        return $this->createQueryBuilder('m')
+            ->innerJoin('m.utilisateur','u')
+            ->where('u.id = :id')
+            ->setParameter('id', $idUser)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function findAllByUser($idUser)
+    {
+        return $this->createQueryBuilder('m')
+            ->innerJoin('m.utilisateur','u')
+            ->where('u.id = :id')
+            ->setParameter('id', $idUser)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

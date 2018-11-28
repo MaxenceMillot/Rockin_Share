@@ -12,6 +12,7 @@
                 <div class="form-group  col-md-3 mx-auto text-center">
                     <form action="{{ path('genre_list_filter') }}" method="post">
                         <select class="form-control" id="filter_typeMedia" name="filter" onchange="this.form.submit();">
+                            <option value="0" selected>No filter</option>
                             {% for type in types %}
                                 {% if idTypeMedia == type.id %}
                                     <option value="{{ type.id }}" selected>{{ type.name }}</option>
@@ -36,13 +37,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for genre in genres %}
+                    {% for genre in genres|sort %}
                         {% if idTypeMedia is not null and idTypeMedia == genre.typeMedia.id %}
                             <tr>
                                 <td>{{ genre.name }}</td>
                                 <td>{{ genre.typeMedia.name }}</td>
                                 <td>
-                                    <a href="{{ path('user_detail',{'id':genre.id}) }}">
+                                    <a href="{{ path('genre_update',{'id':genre.id}) }}">
                                         <img src="{{ asset('img/edit.png') }}" width="28" alt="view detail">
                                     </a>
                                 </td>
@@ -77,6 +78,11 @@
         </div>
     </div>
 
+    <div class="col-md-12 mx-auto text-center mt-2 mb-2">
+        <a class="hvr-grow" href="{{ path('genre_create') }}">
+            <img width="80" src="{{ asset('img/plus.svg') }}" alt="add">
+        </a>
+    </div>
 
     {# Modal #}
     <div class="modal fade" id="confirm-delete">
