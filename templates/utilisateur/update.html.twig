@@ -9,6 +9,9 @@
                 <h1 class="text-center patua">Edit Type</h1>
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
+                {% if is_granted('ROLE_ADMIN') %}
+
+                {% endfor %}
                 <div class="text-center">
                     <button class="btn btn-success btn-lg" type="submit">Update</button>
                 </div>

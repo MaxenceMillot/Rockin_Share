@@ -13,17 +13,17 @@
                             <h1 class="mt-2"><b>{{ user.username }}</b></h1>
                         </div>
                         {% if is_granted('ROLE_ADMIN') %}
-                        <div class="col-md-2 text-right mt-3">
-                            <a href="{{ path('user_update', {'id': user.id}) }}">
-                                <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
-                            </a>
-                        </div>
+                            <div class="col-md-2 text-right mt-3">
+                                <a href="{{ path('user_update', {'id': user.id}) }}">
+                                    <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
+                                </a>
+                            </div>
                         {% elseif app.user.id == user.id %}
-                        <div class="col-md-2 text-right mt-3">
-                            <a href="{{ path('account_update') }}">
-                                <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
-                            </a>
-                        </div>
+                            <div class="col-md-2 text-right mt-3">
+                                <a href="{{ path('account_update') }}">
+                                    <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
+                                </a>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
@@ -35,9 +35,15 @@
                         <li class="list-group-item ">Lastname:  <b>{{ user.lastname }}</b></li>
                         <li class="list-group-item">Firstname: <b>{{ user.firstname }}</b></li>
                         <li class="list-group-item">Email: <b>{{ user.email }}</b></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="list-group-item ">Role:
+                                {% for role in user.roles %}
+                                    <b>{{ role }}</b>
+                                {% endfor %}
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
-
                 <h3><u>Medias:</u></h3>
 
                 <div class="card-body text-center">
