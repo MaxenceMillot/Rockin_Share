@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Media;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,18 +72,78 @@ class MainController extends Controller
         // controller can be blank: it will never be executed!
     }
 
-    /**
-     * @Route("/user/account", name="user_account")
-     */
-    public function userAccount(){
 
+    ################ ACCOUNT ################
+    /**
+     * @Route("/account/", name="account")
+     */
+    public function userDetail(EntityManagerInterface $em){
+        $repo = $em->getRepository(Media::class);
+
+        $user = $this->getUser();
+        $id =  $user->getId();
+
+        $medias = $repo->findAllByUser($id);
+
+        return $this->render('utilisateur/detail.html.twig',
+            [
+                'user'=>$user,
+                'medias'=>$medias
+            ]);
     }
 
     /**
-     * @Route("/user/update", name="user_update")
+     * @Route("/account/update/", name="account_update")
      */
-    public function userUpdate(){
+    public function userUpdate(EntityManagerInterface $em, Request $request, $id=0)
+    {
+        $user = $this->getUser();
 
+        $formUser= $this->createForm(RegistrationType::class, $user);
+        $formUser->handleRequest($request);
+
+        if($formUser->isSubmitted() && $formUser->isValid()){
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', "Your account has been deleted");
+
+            return $this->redirectToRoute('logout');
+
+        }
+
+
+        return $this->render('utilisateur/update.html.twig',
+            [
+                'form' => $formUser->createView()
+            ]
+        );
+    }
+
+    /**
+     * @Route("/account/delete", name="account_delete")
+     */
+    public function deleteUser(EntityManagerInterface $em)
+    {
+        $repo = $em->getRepository(Media::class);
+
+        $user = $this->getUser();
+        $id =  $user->getId();
+
+        $medias = $repo->findOneOrNullByUser($id);
+
+
+        if(!$medias){
+            $em->remove($user);
+            $em->flush();
+
+            $this->addFlash('success', "User has been successfully deleted");
+
+            return $this->redirectToRoute('user_list');
+        }
+
+        $this->addFlash('danger', "Error: Could not delete user because he have medias");
+        return $this->redirectToRoute('user_detail', ['id' => $id], 301);
     }
 
 }

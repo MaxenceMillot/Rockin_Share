@@ -12,9 +12,9 @@
                         <div class="col-md-10 text-left">
                             <h1 class="mt-2"><b>{{ user.username }}</b></h1>
                         </div>
-                        {% if is_granted('ROLE_ADMIN') %} {# TODO: OR is user #}
+                        {% if is_granted('ROLE_ADMIN') or app.user.id is same as(user.id) %} {# TODO: OR is user #}
                             <div class="col-md-2 text-right mt-3">
-                                <a href="{{ path('user_update',{'id':user.id}) }}">
+                                <a href="{{ path('user_update', {'id': user.id}) }}">
                                     <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
                                 </a>
                             </div>
@@ -44,7 +44,7 @@
                             <ul class="list-group list-group-flush rounded shadow">
                                 {% for media in medias %}
                                     <li class="list-group-item "><b>{{ media.name}}</b> updated on <b>{{ media.dateCreated|date("m/d/Y") }}</b>
-                                   {#TODO <li class="list-group-item">Email: <b>{{ media.type }}</b></li>#}
+                                   {# TODO<li class="list-group-item"> <b>{{ media.getGenre().getType().name }}</b></li>#}
                                         <a href="{{ path('media_detail',{'id':media.id}) }}">
                                             <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
                                         </a>

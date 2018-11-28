@@ -112,7 +112,7 @@ class AdminController extends Controller
         }
 
 
-        return $this->render('genre/update.html.twig',
+        return $this->render('utilisateur/update.html.twig',
             [
                 'form' => $formUser->createView()
             ]
