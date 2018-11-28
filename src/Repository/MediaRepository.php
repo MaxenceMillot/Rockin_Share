@@ -36,7 +36,7 @@ class MediaRepository extends ServiceEntityRepository
     }
     */
 
-    public function findByGenre($idGenre)
+    public function findOneOrNullByGenre($idGenre)
     {
         return $this->createQueryBuilder('m')
             ->innerJoin('m.genres','g')

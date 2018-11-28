@@ -26,34 +26,34 @@ class AdminController extends Controller
 
 
 ############### USERS ##############
-/*
-    /**
-     * @Route("/admin/user/create", name="user_create")
+    /*
+        /**
+         * @Route("/admin/user/create", name="user_create")
 
-    public function createUser(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em){
-        $user = new Utilisateur();
+        public function createUser(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $em){
+            $user = new Utilisateur();
 
-        $form = $this->createForm(RegistrationType::class, $user);
-        $form->handleRequest($request);
+            $form = $this->createForm(RegistrationType::class, $user);
+            $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+            if($form->isSubmitted() && $form->isValid()){
 
-            // Crypter le MDP
-            $pass = $encoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($pass);
-            $user->setRoles(['ROLE_USER']);
+                // Crypter le MDP
+                $pass = $encoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($pass);
+                $user->setRoles(['ROLE_USER']);
 
-            $em->persist($user);
-            $em->flush();
+                $em->persist($user);
+                $em->flush();
 
-            $this->addFlash('success', 'Account created');
-            return $this->redirectToRoute('home');
-        }
+                $this->addFlash('success', 'Account created');
+                return $this->redirectToRoute('home');
+            }
 
-return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
+    return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
 
-}
-*/
+    }
+    */
 
     /**
      * @Route("/admin/user/list", name="user_list")
@@ -179,14 +179,14 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
 
             $this->addFlash('success', "Genre has been successfully updated");
 
-            return $this->redirectToRoute('genre_list', ['id' => $id]);
+            return $this->redirectToRoute('genre_list');
 
         }
 
 
         return $this->render('genre/update.html.twig',
             [
-                'formGenre' => $formGenre->createView()
+                'form' => $formGenre->createView()
             ]
         );
     }
@@ -200,7 +200,7 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
         $repo2 = $em->getRepository(Media::class);
 
         $genre = $repo->find($id);
-        $medias = $repo2->findByGenre($id);
+        $medias = $repo2->findOneOrNullByGenre($id);
 
         if(!$medias){
             $em->remove($genre);
@@ -262,18 +262,31 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
     /**
      * @Route("/admin/type/update/{id}", name="type_update")
      */
-    public function typeUpdate(EntityManagerInterface $em, $id=0)
+    public function typeUpdate(EntityManagerInterface $em, Request $request, $id=0)
     {
-        $repo_type = $em->getRepository(TypeMedia::class);
+        $repo = $em->getRepository(TypeMedia::class);
 
-        $type = $repo_type->find($id);
+        $type = $repo->find($id);
 
-        return $this->render("type/update.html.twig",
+        $formType = $this->createForm(TypeMediaType::class, $type);
+        $formType->handleRequest($request);
+
+        if($formType->isSubmitted() && $formType->isValid()){
+            $em->persist($type);
+            $em->flush();
+
+            $this->addFlash('success', "media Type has been successfully updated");
+
+            return $this->redirectToRoute('type_list');
+
+        }
+
+
+        return $this->render('type/update.html.twig',
             [
-                "type"=>$type,
-            ]);
-
-
+                'form' => $formType->createView()
+            ]
+        );
     }
 
     /**
@@ -285,7 +298,7 @@ return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
         $repo2 = $em->getRepository(Genre::class);
 
         $type = $repo->find($id);
-        $genre = $repo2->findByTypeMedia($id);
+        $genre = $repo2->findOneOrNullByTypeMedia($id);
 
         if(!$genre){
             $em->remove($type);
