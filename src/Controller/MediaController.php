@@ -30,7 +30,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/media/create", name="media_create")
+     * @Route("/account/media/create", name="media_create")
      */
     public function createMedia(EntityManagerInterface $em,Request $request)
     {

@@ -52,6 +52,7 @@ class MediaType extends AbstractType
                 'class' => Genre::class,
                 'choices' =>$genres,
                 'multiple' => true,
+                'required' => true,
                 'choice_label' => 'name',
                 'placeholder' => ''
             ));
