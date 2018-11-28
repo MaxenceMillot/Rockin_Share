@@ -43,12 +43,11 @@ class AccountController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', "Your account has been deleted");
+            $this->addFlash('success', "Your account has been updated");
 
-            return $this->redirectToRoute('logout');
+            return $this->redirectToRoute('account');
 
         }
-
 
         return $this->render('utilisateur/update.html.twig',
             [
@@ -71,5 +70,52 @@ class AccountController extends Controller
 
         $this->addFlash('success', "Account successfully deleted");
         return $this->redirectToRoute('home');
+    }
+
+
+    ######### MY MEDIAS ############
+    /**
+     * @Route("/account/mymedia/list", name="myMedia_list")
+     */
+    public function listMyMedia(EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+        $id =  $user->getId();
+
+        $repo = $em->getRepository(Media::class);
+
+        $listeMedias = $repo->findByUtilisateur($id);
+
+        return $this->render("media/liste.html.twig",['listeMedias' => $listeMedias]);
+    }
+
+    /**
+     * @Route("/account/mymedia/detail/{id}", name="myMedia_detail")
+     */
+    public function detailMyMedia()
+    {
+        return $this->render('media/index.html.twig', [
+            'controller_name' => 'MediaController',
+        ]);
+    }
+
+    /**
+     * @Route("/account/mymedia/update/{id}", name="myMedia_update")
+     */
+    public function updateMyMedia()
+    {
+        return $this->render('media/index.html.twig', [
+            'controller_name' => 'MediaController',
+        ]);
+    }
+
+    /**
+     * @Route("/account/mymedia/delete/{id}", name="myMedia_delete")
+     */
+    public function deleteMyMedia()
+    {
+        return $this->render('media/index.html.twig', [
+            'controller_name' => 'MediaController',
+        ]);
     }
 }

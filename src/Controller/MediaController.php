@@ -94,50 +94,6 @@ class MediaController extends Controller
         ]);
     }
 
-
-    ######### MY MEDIAS ############
-    /**
-     * @Route("/account/mymedia/list", name="myMedia_list")
-     */
-    public function listMyMedia(EntityManagerInterface $em)
-    {
-        $repo = $em->getRepository(Media::class);
-
-        $listeMedias = $repo->findByUtilisateur();
-
-        return $this->render("media/liste.html.twig",['listeMedias' => $listeMedias]);
-    }
-
-    /**
-     * @Route("/account/mymedia/detail/{id}", name="myMedia_detail")
-     */
-    public function detailMyMedia()
-    {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
-    }
-
-    /**
-     * @Route("/account/mymedia/update/{id}", name="myMedia_update")
-     */
-    public function updateMyMedia()
-    {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
-    }
-
-    /**
-     * @Route("/account/mymedia/delete/{id}", name="myMedia_delete")
-     */
-    public function deleteMyMedia()
-    {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
-    }
-
     /**
      * @return string
      */

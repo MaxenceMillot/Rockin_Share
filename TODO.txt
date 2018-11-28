@@ -1,0 +1,14 @@
+Users:
+    - add password reset
+    - add password change (seperated from update)
+    - add role change
+    
+MyList:
+    - do everything
+
+Media:
+    -
+
+Others:
+    - Send mails
+    - Ajouter player (media_detail)
