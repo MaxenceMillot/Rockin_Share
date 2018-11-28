@@ -72,14 +72,21 @@ class AdminController extends Controller
      */
     public function userDetail(EntityManagerInterface $em, $id=0){
         $repo = $em->getRepository(Utilisateur::class);
+        $repo2 = $em->getRepository(Media::class);
 
         $user = $repo->find($id);
+        $medias = $repo2->findAllByUser($id);
+
         /*
                 if($idea == null){
                     throw
                 }
         */
-        return $this->render('utilisateur/detail.html.twig', ['user'=>$user]);
+        return $this->render('utilisateur/detail.html.twig',
+            [
+                'user'=>$user,
+                'medias'=>$medias
+            ]);
     }
 
     /**

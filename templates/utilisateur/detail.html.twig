@@ -32,22 +32,28 @@
                     </ul>
                 </div>
 
-                {% if is_granted('ROLE_ADMIN') %} {# TODO: OR is user #}
+                <h3><u>Medias:</u></h3>
 
-                    <h3><u>Medias:</u></h3>
+                <div class="card-body text-center">
+                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <img src="{{ asset('img/sort-down.png') }}" alt="show medias">
+                    </a>
 
-                    <div class="card-body text-center">
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            <img src="{{ asset('img/sort-down.png') }}" alt="show medias">
-                        </a>
-
-                        <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
-                                Hello there
-                            </div>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <ul class="list-group list-group-flush rounded shadow">
+                                {% for media in medias %}
+                                    <li class="list-group-item "><b>{{ media.name}}</b> updated on <b>{{ media.dateCreated|date("m/d/Y") }}</b>
+                                   {#TODO <li class="list-group-item">Email: <b>{{ media.type }}</b></li>#}
+                                        <a href="{{ path('media_detail',{'id':media.id}) }}">
+                                            <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
-                {% endif %}
+                </div>
 
                 {% if is_granted('ROLE_ADMIN') %}
                     <div class="text-right mr-3 mb-3">
