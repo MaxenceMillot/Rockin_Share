@@ -46,4 +46,15 @@ class MediaRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findOneOrNullByUser($idUser)
+    {
+        return $this->createQueryBuilder('m')
+            ->innerJoin('m.utilisateur','u')
+            ->where('u.id = :id')
+            ->setParameter('id', $idUser)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

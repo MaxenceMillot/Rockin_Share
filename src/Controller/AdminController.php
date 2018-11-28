@@ -7,6 +7,7 @@ use App\Entity\Media;
 use App\Entity\TypeMedia;
 use App\Entity\Utilisateur;
 use App\Form\GenreType;
+use App\Form\RegistrationType;
 use App\Form\TypeMediaType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -67,38 +68,73 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/admin/user/detail/{id]", name="user_detail")
+     * @Route("/admin/user/detail/{id}", name="user_detail")
      */
     public function userDetail(EntityManagerInterface $em, $id=0){
         $repo = $em->getRepository(Utilisateur::class);
 
-        $idea = $repo->find($id);
+        $user = $repo->find($id);
         /*
                 if($idea == null){
                     throw
                 }
         */
-        return $this->render('utilisateur/detail.html.twig', ['idea'=>$idea]);
+        return $this->render('utilisateur/detail.html.twig', ['user'=>$user]);
     }
 
     /**
-     * @Route("/admin/user/update/{id]", name="user_update")
+     * @Route("/admin/user/update/{id}", name="user_update")
      */
-    public function userUpdate()
+    public function userUpdate(EntityManagerInterface $em, Request $request, $id=0)
     {
-        return $this->render('utilisateur/update.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        $repo = $em->getRepository(Utilisateur::class);
+
+        $user = $repo->find($id);
+
+        $formUser= $this->createForm(RegistrationType::class, $user);
+        $formUser->handleRequest($request);
+
+        if($formUser->isSubmitted() && $formUser->isValid()){
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', "User has been successfully updated");
+
+            return $this->redirectToRoute('user_detail', ['id' => $id], 301);
+
+        }
+
+
+        return $this->render('genre/update.html.twig',
+            [
+                'form' => $formUser->createView()
+            ]
+        );
     }
 
     /**
-     * @Route("/admin/user/delete/{id]", name="user_delete")
+     * @Route("/admin/user/delete/{id}", name="user_delete")
      */
-    public function deleteUser()
+    public function deleteUser(EntityManagerInterface $em, $id=0)
     {
-        return $this->render('user/delete.html.twig', [
-            'controller_name' => 'AdminController',
-        ]);
+        $repo = $em->getRepository(Utilisateur::class);
+        $repo2 = $em->getRepository(Media::class);
+
+        $user = $repo->find($id);
+        $medias = $repo2->findOneOrNullByUser($id);
+
+
+        if(!$medias){
+            $em->remove($user);
+            $em->flush();
+
+            $this->addFlash('success', "User has been successfully deleted");
+
+            return $this->redirectToRoute('user_list');
+        }
+
+        $this->addFlash('danger', "Error: Could not delete user because he have medias");
+        return $this->redirectToRoute('user_detail', ['id' => $id], 301);
     }
 
 
@@ -309,7 +345,7 @@ class AdminController extends Controller
             return $this->redirectToRoute('type_list');
         }
 
-        $this->addFlash('danger', "Error: this Type is used by Genres medias");
+        $this->addFlash('danger', "Error: this Type is used by a Genre");
         return $this->redirectToRoute('type_list');
 
     }
