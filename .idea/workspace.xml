@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9dc3ff28-7251-4236-9162-7923956c7176" name="Default Changelist" comment="finished typeMedia CRUD">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="9dc3ff28-7251-4236-9162-7923956c7176" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/utilisateur/update.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/utilisateur/update.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,10 +71,10 @@
         <counts>
           <entry key="css" value="577" />
           <entry key="env" value="39" />
-          <entry key="gitignore" value="1" />
+          <entry key="gitignore" value="9" />
           <entry key="php" value="4044" />
           <entry key="twig" value="4246" />
-          <entry key="txt" value="1279" />
+          <entry key="txt" value="1285" />
           <entry key="yaml" value="76" />
         </counts>
       </usages-collector>
@@ -86,7 +84,7 @@
           <entry key="CSS" value="577" />
           <entry key="JavaScript" value="5" />
           <entry key="PHP" value="4025" />
-          <entry key="PLAIN_TEXT" value="1280" />
+          <entry key="PLAIN_TEXT" value="1294" />
           <entry key="SQL" value="19" />
           <entry key="Twig" value="4241" />
           <entry key="YAML" value="76" />
@@ -143,8 +141,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+            <state relative-caret-position="85">
+              <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -590,7 +588,7 @@
       <workItem from="1543398163413" duration="3729000" />
       <workItem from="1543401954803" duration="1430000" />
       <workItem from="1543403807663" duration="143000" />
-      <workItem from="1543403984985" duration="12990000" />
+      <workItem from="1543403984985" duration="13023000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1543224855200</created>
@@ -851,11 +849,18 @@
       <option name="project" value="LOCAL" />
       <updated>1543413310221</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="update">
+      <created>1543417912983</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1543417912983</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69401000" />
+    <option name="totallyTimeSpent" value="69434000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -910,7 +915,6 @@
     <MESSAGE value="card style" />
     <MESSAGE value="register style" />
     <MESSAGE value="a bit of this and a bit of that" />
-    <MESSAGE value="update" />
     <MESSAGE value="Finished home page. nav link added" />
     <MESSAGE value="navbar huge rework/ path and roles done" />
     <MESSAGE value="Edited &quot;myMedia&quot; routes names" />
@@ -925,7 +929,8 @@
     <MESSAGE value="Finished USER CRUD (admin AND user side)" />
     <MESSAGE value="SYNCHRO" />
     <MESSAGE value="finished typeMedia CRUD" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished typeMedia CRUD" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1279,8 +1284,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        <state relative-caret-position="85">
+          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
