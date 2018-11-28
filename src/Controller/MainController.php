@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -41,8 +42,8 @@ class MainController extends Controller
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('success', 'Compte créé avec succès');
-            return $this->redirectToRoute('home');
+            $this->addFlash('success', 'Account created');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('main/register.html.twig', ['form'=>$form->createView()]);
@@ -71,79 +72,4 @@ class MainController extends Controller
     public function logout(){
         // controller can be blank: it will never be executed!
     }
-
-
-    ################ ACCOUNT ################
-    /**
-     * @Route("/account/", name="account")
-     */
-    public function userDetail(EntityManagerInterface $em){
-        $repo = $em->getRepository(Media::class);
-
-        $user = $this->getUser();
-        $id =  $user->getId();
-
-        $medias = $repo->findAllByUser($id);
-
-        return $this->render('utilisateur/detail.html.twig',
-            [
-                'user'=>$user,
-                'medias'=>$medias
-            ]);
-    }
-
-    /**
-     * @Route("/account/update/", name="account_update")
-     */
-    public function userUpdate(EntityManagerInterface $em, Request $request, $id=0)
-    {
-        $user = $this->getUser();
-
-        $formUser= $this->createForm(RegistrationType::class, $user);
-        $formUser->handleRequest($request);
-
-        if($formUser->isSubmitted() && $formUser->isValid()){
-            $em->persist($user);
-            $em->flush();
-
-            $this->addFlash('success', "Your account has been deleted");
-
-            return $this->redirectToRoute('logout');
-
-        }
-
-
-        return $this->render('utilisateur/update.html.twig',
-            [
-                'form' => $formUser->createView()
-            ]
-        );
-    }
-
-    /**
-     * @Route("/account/delete", name="account_delete")
-     */
-    public function deleteUser(EntityManagerInterface $em)
-    {
-        $repo = $em->getRepository(Media::class);
-
-        $user = $this->getUser();
-        $id =  $user->getId();
-
-        $medias = $repo->findOneOrNullByUser($id);
-
-
-        if(!$medias){
-            $em->remove($user);
-            $em->flush();
-
-            $this->addFlash('success', "User has been successfully deleted");
-
-            return $this->redirectToRoute('user_list');
-        }
-
-        $this->addFlash('danger', "Error: Could not delete user because he have medias");
-        return $this->redirectToRoute('user_detail', ['id' => $id], 301);
-    }
-
 }

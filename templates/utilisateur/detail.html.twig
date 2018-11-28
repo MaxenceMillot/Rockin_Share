@@ -12,12 +12,18 @@
                         <div class="col-md-10 text-left">
                             <h1 class="mt-2"><b>{{ user.username }}</b></h1>
                         </div>
-                        {% if is_granted('ROLE_ADMIN') or app.user.id is same as(user.id) %} {# TODO: OR is user #}
-                            <div class="col-md-2 text-right mt-3">
-                                <a href="{{ path('user_update', {'id': user.id}) }}">
-                                    <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
-                                </a>
-                            </div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <div class="col-md-2 text-right mt-3">
+                            <a href="{{ path('user_update', {'id': user.id}) }}">
+                                <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
+                            </a>
+                        </div>
+                        {% elseif app.user.id == user.id %}
+                        <div class="col-md-2 text-right mt-3">
+                            <a href="{{ path('account_update') }}">
+                                <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
+                            </a>
+                        </div>
                         {% endif %}
                     </div>
                 </div>
@@ -43,8 +49,8 @@
                         <div class="card card-body">
                             <ul class="list-group list-group-flush rounded shadow">
                                 {% for media in medias %}
-                                    <li class="list-group-item "><b>{{ media.name}}</b> updated on <b>{{ media.dateCreated|date("m/d/Y") }}</b>
-                                   {# TODO<li class="list-group-item"> <b>{{ media.getGenre().getType().name }}</b></li>#}
+                                    <li class="list-group-item "><b>{{ media.name}}</b> uploaded on <b>{{ media.dateCreated|date("d/m/Y") }}</b>
+                                        {# TODO<li class="list-group-item"> <b>{{ media.getGenre().getType().name }}</b></li>#}
                                         <a href="{{ path('media_detail',{'id':media.id}) }}">
                                             <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
                                         </a>
@@ -58,6 +64,12 @@
                 {% if is_granted('ROLE_ADMIN') %}
                     <div class="text-right mr-3 mb-3">
                         <a data-toggle="modal" href="#confirm-delete">
+                            <img src="{{ asset('img/delete.png') }}" width="32" alt="external_link">
+                        </a>
+                    </div>
+                {% elseif app.user.id == user.id %}
+                    <div class="text-right mr-3 mb-3">
+                        <a data-toggle="modal" href="#confirm-delete-2">
                             <img src="{{ asset('img/delete.png') }}" width="32" alt="external_link">
                         </a>
                     </div>
@@ -81,6 +93,24 @@
                 </div>
                 <div class="modal-footer">
                     <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-success">Yes</a>
+                    <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Modal 2 (self delete) #}
+    <div class="modal fade" id="confirm-delete-2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                    Do you really want to delete your account ?
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('account_delete') }}" class="btn btn-success">Yep</a>
                     <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
                 </div>
             </div>
