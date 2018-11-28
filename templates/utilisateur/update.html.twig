@@ -10,8 +10,8 @@
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
                 {% if is_granted('ROLE_ADMIN') %}
-
-                {% endfor %}
+                   {#TODO #} change role
+                {% endif %}
                 <div class="text-center">
                     <button class="btn btn-success btn-lg" type="submit">Update</button>
                 </div>
