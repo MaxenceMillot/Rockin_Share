@@ -15,6 +15,7 @@
                 </div>
 
                 {{ form_widget(form) }}
+                <small class="form-text text-muted">Vous pouvez ajouter plusieurs genres en maintenant la touche 'Ctrl' appuyée</small>
                 <div class="text-center">
                     <button class="btn btn-success btn-lg" type="submit">Add</button>
                 </div>
@@ -27,33 +28,26 @@
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-        $('#appbundle_media_typeMedia').change(function () {
-            var typeMediaSelector = $(this);
-
-            // Request the genres of the selected typeMedia.
+        var $typeMedia = $('#media_typeMedia');
+        // When sport gets selected ...
+        $typeMedia.change(function() {
+            // ... retrieve the corresponding form.
+            var $form = $(this).closest('form');
+            // Simulate form data, but only include the selected sport value.
+            var data = {};
+            data[$typeMedia.attr('name')] = $typeMedia.val();
+            // Submit data via AJAX to the form's action path.
             $.ajax({
-                url: "{{ path('media_list_genres') }}",
-                type: "GET",
-                dataType: "JSON",
-                data: {
-                    typeMediaId: typeMediaSelector.val()
-                },
-                success: function (genres) {
-                    var genresSelect = $("#appbundle_media_genres");
-
-                    // Remove current options
-                    genresSelect.html('');
-
-                    // Empty value ...
-                    genresSelect.append('<option value> Select a genre of ' + typeMediaSelector.find("option:selected").text() + ' ...</option>');
-
-
-                    $.each(genres, function (key, genre) {
-                        genresSelect.append('<option value="' + genre.id + '">' + genre.name + '</option>');
-                    });
-                },
-                error: function (err) {
-                    alert("An error ocurred while loading data ...");
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : data,
+                success: function(html) {
+                    // Replace current position field ...
+                    $('#media_genre').replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#media_genre')
+                    );
+                    // Position field now displays the appropriate positions.
                 }
             });
         });

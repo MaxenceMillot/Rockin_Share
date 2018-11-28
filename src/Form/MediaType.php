@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Genre;
 use App\Entity\Media;
 use App\Entity\TypeMedia;
-use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -40,73 +39,54 @@ class MediaType extends AbstractType
             #->add('dateCreated')
             ->add('picture',FileType::class)
             #->add('extension')
-            ->add('genre', (EntityType::class), array(
-                'class' => Genre::class,
-                'choice_label' => 'name',
-
+            ->add('typeMedia', EntityType::class, array(
+                'class' => TypeMedia::class,
+                'placeholder' => '',
+                'mapped' => false,
+                'choice_label' => 'name'
             ));
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
-        $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
+        $formModifier = function (FormInterface $form, TypeMedia $typeMedia = null) {
+            $genres = null === $typeMedia ? array() : $typeMedia->getGenres();
+            $form->add('genre', (EntityType::class), array(
+                'class' => Genre::class,
+                'choices' =>$genres,
+                'multiple' => true,
+                'choice_label' => 'name',
+                'placeholder' => ''
+            ));
+        };
+
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($formModifier) {
+                // this would be your entity, i.e. SportMeetup
+                $data = $event->getData();
+
+                $formModifier($event->getForm(), $data->getGenre());
+            }
+        );
+
+        $builder ->get('typeMedia')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function (FormEvent $event) use ($formModifier) {
+                // It's important here to fetch $event->getForm()->getData(), as
+                // $event->getData() will get you the client data (that is, the ID)
+                $typeMedia = $event->getForm()->getData();
+
+                // since we've added the listener to the child, we'll have to pass on
+                // the parent to the callback functions!
+                $formModifier($event->getForm()->getParent(), $typeMedia);
+            }
+        );
     }
 
-    protected function addElements(FormInterface $form, TypeMedia $typeMedia = null) {
-        // 4. Add the province element
-        $form->add('typeMedia', EntityType::class, array(
-            'required' => true,
-            'data' => $typeMedia,
-            'placeholder' => 'Select a media type...',
-            'class' => TypeMedia::class
-        ));
 
-        // Neighborhoods empty, unless there is a selected City (Edit View)
-        $genres = array();
 
-        // If there is a city stored in the Person entity, load the neighborhoods of it
-        if ($typeMedia) {
-            // Fetch Neighborhoods of the City if there's a selected city
-            $repoGenre = $this->em->getRepository(Genre::class);
-            $genres = $repoGenre->findByTypeMedia($typeMedia->getId());
-        }
-
-        // Add the Neighborhoods field with the properly data
-        $form->add('genre', EntityType::class, array(
-            'required' => true,
-            'placeholder' => 'Select a media type first ...',
-            'class' => Genre::class,
-            'choices' => $genres
-        ));
-    }
-
-    function onPreSubmit(FormEvent $event) {
-        $form = $event->getForm();
-        $data = $event->getData();
-
-        // Search for selected typeMedia and convert it into an Entity
-        $typeMedia = $this->em->getRepository(TypeMedia::class)->find($data['TypeMedia']);
-
-        $this->addElements($form, $typeMedia);
-    }
-
-    function onPreSetData(FormEvent $event) {
-        $media = $event->getData();
-        $form = $event->getForm();
-
-        // When you create a new person, the City is always empty
-        $typeMedia = $media->getGenre() ? $media->getGenre() : null;
-
-        $this->addElements($form, $typeMedia);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
+    public function getName()
     {
-        return 'appbundle_Media';
+        return "media_type";
     }
-
-
 
     public function configureOptions(OptionsResolver $resolver)
     {

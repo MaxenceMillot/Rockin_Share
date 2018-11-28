@@ -52,7 +52,7 @@ class TypeMedia
     /**
      * @return mixed
      */
-    public function getIdeas()
+    public function getGenres()
     {
         return $this->genres;
     }
@@ -60,7 +60,7 @@ class TypeMedia
     /**
      * @param mixed $genres
      */
-    public function setIdeas($genres)
+    public function setGenres($genres)
     {
         $this->genres = $genres;
     }

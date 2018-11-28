@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Liste des médias | {{ parent() }}{% endblock %}
+{% block title %}Liste des mÃ©dias | {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -14,10 +14,10 @@
                 <table class="table table-hover bg-light">
                     <thead class="thead-dark">
                     <tr class="text-center" >
-                        <th scope="col" style="width: 20%">Picture</th>
+                        <th scope="col" style="width: 15%">Picture</th>
                         <th scope="col" style="width: 50%">Name</th>
-                        <th scope="col" style="width: 50%">Genres</th>
-                        <th scope="col" style="width: 25%">Edit</th>
+                        <th scope="col" style="width: 25%">Type</th>
+                        <th scope="col" style="width: 10%">Edit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,13 +25,12 @@
                         <tr class="text-center" id="table-media">
                             <td><img src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}"> </td>
                             <td class="font-weight-bold">{{ media.name }}</td>
-                            <td>
-                                <ul class="list-group list-group-flush">
-                                    {% for genre in media.getGenre() %}
-                                        <li class="list-group-item">{{ genre.name }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </td>
+                            {% set genres = media.getGenre().getValues() %}
+                            {% set count = 0 %}
+                            {% for genre in genres if count == 0 %}
+                                <td>{{ genre.typeMedia.name }}</td>
+                                {% set count = 1 %}
+                            {% endfor %}
                             <td>
                                 <a href="{{ path('user_detail',{'id':media.id}) }}">
                                     <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
