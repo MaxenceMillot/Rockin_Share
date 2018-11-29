@@ -11,11 +11,11 @@
                         {{ media.name}}
                     </h1>
                     <picture>
-                    {% if isPicture %}
-                        <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('files/pictures/'~ media.picture ~'.jpg') }}" alt="{{ media.name }}">
-                    {% else %}
-                        <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
-                    {% endif %}
+                        {% if isPicture %}
+                            <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('files/pictures/'~ media.picture ~'.jpg') }}" alt="{{ media.name }}">
+                        {% else %}
+                            <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
+                        {% endif %}
                     </picture>
                     <audio controls="controls" class="mx-auto">
                         <source src="{{ asset('files/medias/'~ media.id ~'.'~ media.extension ) }}" type="audio/{{ media.extension }}" />
@@ -52,7 +52,7 @@
         {% elseif typeMedia == "Film" %}
 
             <div class="row">
-                <div class="col-md-8 text-center card mx-auto mt-5 pb-3">
+                <div class="col-md-8 text-center card mx-auto mt-3 pb-3">
                     <h1 class="my-2 patua">
                         {{ media.name}}
                     </h1>
@@ -63,16 +63,34 @@
                 </div>
             </div>
             <div class="row">
-                <div class="text-center mt-3 mx-left col-md-6" style="width: 500px">
+                <div class="text-center mt-3 mx-left col-md-4" style="width: 500px">
                     <div class="card"> <h2>Author</h2>
                         <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="col-md-5 text-center float-md-right card mt-3 w-100 mw-100" style="width: 500px">
-                        <h2>Description</h2>
-                        <div><p>{{ media.description }}</p></div>
+                <div class="col-md-4">
+                    <div class="text-center mt-4 font-weight-bold ">
+                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success btn-block">Télécharger</a>
                     </div>
+                </div>
+                <div class="text-center mt-3 mx-left col-md-4" style="width: 500px">
+                    <div class="card"> <h2>Creation Date</h2>
+                        <div><h3 class="font-weight-bold">{{ media.dateCreated|date("d/m/Y") }}</h3></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="text-center card mt-2 col-md-5 mr-3" style="width: 500px">
+                    <ul class="list-group mt-2 mb-3 liste-genres">
+                        {% for genre in media.genre %}
+                            <li class="list-group-item">{{ genre.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-6 text-center card mt-3 mx-auto" style="width: 500px">
+                    <h2>Description</h2>
+                    <div><p>{{ media.description }}</p></div>
                 </div>
             </div>
         {% elseif typeMedia == "Image" %}

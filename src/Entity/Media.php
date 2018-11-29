@@ -46,7 +46,7 @@ class Media implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $picture;
+    private $picture = '';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
