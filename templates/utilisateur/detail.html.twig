@@ -61,27 +61,27 @@
                 <h3><u>Medias:</u></h3>
 
                 <div class="card-body text-center">
-                        <div class="card card-body">
-                            <ul class="list-group list-group-flush rounded shadow scrollable-list">
-                                {% for media in medias %}
-                                    <li class="list-group-item text-left">
-                                        <b>
-                                            <a href="{{ path('media_detail',{'id':media.id}) }}">
-                                                {{ media.name}}.{{ media.getExtension() }}
-                                            </a>
-                                        </b>
-                                        uploaded on <b>{{ media.dateCreated|date("d/m/Y") }}</b>
-                                        {% if is_granted('ROLE_ADMIN') or app.user.username is same as(user.name) %}
+                    <div class="card card-body">
+                        <ul class="list-group list-group-flush rounded shadow scrollable-list">
+                            {% for media in medias %}
+                                <li class="list-group-item text-left">
+                                    <b>
+                                        <a href="{{ path('media_detail',{'id':media.id}) }}">
+                                            {{ media.name}}.{{ media.getExtension() }}
+                                        </a>
+                                    </b>
+                                    uploaded on <b>{{ media.dateCreated|date("d/m/Y") }}</b>
+                                    {% if is_granted('ROLE_ADMIN') or app.user.username is same as(user.username) %}
                                         <div class="text-right">
-                                            <a data-toggle="modal" href="#confirm-delete3">
+                                            <a class="confirm-delete-btn" data-toggle="modal" data-id="{{ media.id }}" href="#confirm-delete-3">
                                                 <img src="{{ asset('img/delete.png') }}" width="32" alt="external_link">
                                             </a>
                                         </div>
-                                        {% endif %}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,12 +136,21 @@
                     Do you really want to delete this media ?
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ path('media_delete') }}" class="btn btn-success">Yep</a>
+                    <a id="confirm-delete-link" href="" class="btn btn-success">Yep</a>
                     <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
                 </div>
             </div>
         </div>
     </div>
-
+{% block javascript %}
+    <script>
+    $( ".confirm-delete-btn" ).click(function() {
+        var link = $( this );
+        var id = link.data("id");
+        $("#confirm-delete-link").attr("href", "{{ path('media_delete', {'idUser': user.id}) }}/"+id);
+        console.log(id);
+    });
+</script>
+{% endblock %}
 
 {% endblock %}

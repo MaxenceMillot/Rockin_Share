@@ -4,7 +4,6 @@ Users:
     - add role change
     
 MyList:
-    - do everything
 
 Media:
     - Trier les listes par types/dates
@@ -12,4 +11,3 @@ Media:
 
 Others:
     - Send mails
-    - Ajouter media player
