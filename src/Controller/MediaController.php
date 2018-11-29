@@ -25,9 +25,24 @@ class MediaController extends Controller
     {
         $repo = $em->getRepository(Media::class);
 
-        $listeMedias = $repo->findAll();
 
-        return $this->render("media/liste.html.twig",['listeMedias' => $listeMedias]);
+        $listeMedias = $repo->findAll();
+        $arrayIsPicture = [];
+
+        foreach ($listeMedias as $media){
+            $isPicture = false;
+            if (file_exists('public/files/pictures/'.$media->getPicture().'.jpg') )
+            {
+                $isPicture = true;
+            }
+            array_push($arrayIsPicture,$isPicture);
+        }
+
+
+        return $this->render("media/liste.html.twig",[
+            'listeMedias' => $listeMedias,
+            'arrayIsPicture' => $arrayIsPicture
+        ]);
     }
 
     /**
@@ -99,12 +114,12 @@ class MediaController extends Controller
     public function detailMedia(EntityManagerInterface $em, $id = 0)
     {
         $repo = $em->getRepository(Media::class);
-        $isPicture = true;
         $media = $repo->find($id);
-
         $genres = $media->getGenre();
         $genre = $genres[0];
-        if (!$media->getPicture())
+
+        $isPicture = true;
+        if (!file_exists($media->getPicture().'.jpg') )
         {
             $isPicture = false;
         }

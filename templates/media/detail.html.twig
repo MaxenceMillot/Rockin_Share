@@ -10,8 +10,13 @@
                     <h1 class="my-2 patua">
                         {{ media.name}}
                     </h1>
-                    {% if is %}
-                    <img class="img-thumbnail rounded mx-auto d-block mb-3" height="450" width="450" src="{{ asset('files/pictures/'~ media.picture ~'.jpg') }}" alt="{{ media.name }}">
+                    <picture>
+                    {% if isPicture %}
+                        <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('files/pictures/'~ media.picture ~'.jpg') }}" alt="{{ media.name }}">
+                    {% else %}
+                        <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
+                    {% endif %}
+                    </picture>
                     <audio controls="controls" class="mx-auto">
                         <source src="{{ asset('files/medias/'~ media.id ~'.'~ media.extension ) }}" type="audio/{{ media.extension }}" />
                         Your browser does not support the audio tag.

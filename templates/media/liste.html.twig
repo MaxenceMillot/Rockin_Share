@@ -26,9 +26,19 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {% set loopValue = 0 %}
                     {% for media in listeMedias %}
                         <tr class="text-center" id="table-media">
-                            <td><img src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}"> </td>
+
+                            <td>
+                                <picture>
+                                    {% if arrayIsPicture[loopValue] is same as(true)%}
+                                        <img class="img-thumbnail rounded mx-auto d-block mb-3" src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}">
+                                    {% else %}
+                                        <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
+                                    {% endif %}
+                                </picture>
+                            </td>
                             <td class="font-weight-bold">{{ media.name }}</td>
                                 <td>{{ media.getGenre()|first.getTypeMedia().name }}</td>
                             <td>
@@ -37,6 +47,7 @@
                                 </a>
                             </td>
                         </tr>
+                        {% set loopValue = loopValue + 1%}
                     {% endfor %}
                     </tbody>
                 </table>

@@ -86,7 +86,21 @@ class AccountController extends Controller
 
         $listeMedias = $repo->findByUtilisateur($id);
 
-        return $this->render("media/liste.html.twig",['listeMedias' => $listeMedias]);
+        $arrayIsPicture = [];
+
+        foreach ($listeMedias as $media){
+            $isPicture = true;
+            if (!file_exists($media->getPicture().'.jpg') )
+            {
+                $isPicture = false;
+            }
+            array_push($arrayIsPicture,$isPicture);
+        }
+
+        return $this->render("media/liste.html.twig",[
+            'listeMedias' => $listeMedias,
+            'arrayIsPicture' => $arrayIsPicture
+        ]);
     }
 
     /**
