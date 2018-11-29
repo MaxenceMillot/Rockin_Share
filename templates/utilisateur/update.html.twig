@@ -10,7 +10,17 @@
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
                 {% if is_granted('ROLE_ADMIN') %}
-                   {#TODO #} change role
+                            {% if "ROLE_ADMIN" in app.user.roles|keys %}
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="isAdmin" name="isAdmin" checked>
+                                    <label class="form-check-label" for="exampleCheck1">Role Admin</label>
+                                </div>
+                             {% else %}
+                                 <div class="form-check">
+                                     <input type="checkbox" class="form-check-input" id="isAdmin" name="isAdmin">
+                                     <label class="form-check-label" for="exampleCheck1">Role Admin</label>
+                                 </div>
+                            {% endif %}
                 {% endif %}
 
                 <div class="container">

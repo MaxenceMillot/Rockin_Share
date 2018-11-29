@@ -6,6 +6,7 @@ use App\Entity\Genre;
 use App\Entity\Media;
 use App\Entity\TypeMedia;
 use App\Entity\Utilisateur;
+use App\Form\EditUtilisateurType;
 use App\Form\GenreType;
 use App\Form\RegistrationType;
 use App\Form\TypeMediaType;
@@ -98,10 +99,16 @@ class AdminController extends Controller
 
         $user = $repo->find($id);
 
-        $formUser= $this->createForm(RegistrationType::class, $user);
+        $formUser= $this->createForm(EditUtilisateurType::class, $user);
         $formUser->handleRequest($request);
 
         if($formUser->isSubmitted() && $formUser->isValid()){
+            $isAdmin = $request->request->get("isAdmin");
+            if($isAdmin){
+                $user->setRoles('ROLE_ADMIN');
+            }else{
+                $user->setRoles('ROLE_USER');
+            }
             $em->persist($user);
             $em->flush();
 
@@ -114,7 +121,8 @@ class AdminController extends Controller
 
         return $this->render('utilisateur/update.html.twig',
             [
-                'form' => $formUser->createView()
+                'form' => $formUser->createView(),
+                'user' => $user
             ]
         );
     }

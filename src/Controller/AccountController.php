@@ -64,6 +64,10 @@ class AccountController extends Controller
      */
     public function passwordUpdate(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $encoder)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $user = $this->getUser();
 
         $formUser= $this->createForm(EditPasswordType::class, $user);

@@ -1,15 +1,12 @@
 Users:
     - edit utilisateur => if admin => edit role
-    - add password reset
     - add password change (only for app.user => not admin)
-    - add role change
     
 MyList:
 
 Media:
     - Filtrer les listes par types/dates
     - Tri dynamique sur click header
-    - NE PAS FORCER l'ajout d'un "picture" => changer "file->move()"
 
 Others:
     - Send mails
