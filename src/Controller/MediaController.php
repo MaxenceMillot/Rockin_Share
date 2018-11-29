@@ -158,6 +158,37 @@ class MediaController extends Controller
     }
 
     /**
+     * @Route("/media/update/{id}", name="media_update")
+     */
+    public function mediaUpdate(EntityManagerInterface $em, Request $request, $id=0)
+    {
+        //TODO: Get this to work => Kylian
+        $repo = $em->getRepository(Media::class);
+
+        $media = $repo->find($id);
+
+        $formMedia = $this->createForm(MediaType::class, $media);
+        $formMedia->handleRequest($request);
+
+        if($formMedia->isSubmitted() && $formMedia->isValid()){
+            $em->persist($media);
+            $em->flush();
+
+            $this->addFlash('success', "Media has been successfully updated");
+
+            return $this->redirectToRoute('media_list');
+
+        }
+
+
+        return $this->render('media/form.html.twig',
+            [
+                'form' => $formMedia->createView()
+            ]
+        );
+    }
+
+    /**
      * @return string
      */
     private function generateUniquePictureName()

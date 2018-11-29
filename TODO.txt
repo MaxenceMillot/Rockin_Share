@@ -7,8 +7,9 @@ Users:
 MyList:
 
 Media:
-    - Trier les listes par types/dates
+    - Filtrer les listes par types/dates
     - Tri dynamique sur click header
+    - NE PAS FORCER l'ajout d'un "picture" => changer "file->move()"
 
 Others:
     - Send mails

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Media;
+use App\Form\EditUtilisateurType;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,7 +37,7 @@ class AccountController extends Controller
     {
         $user = $this->getUser();
 
-        $formUser= $this->createForm(RegistrationType::class, $user);
+        $formUser= $this->createForm(EditUtilisateurType::class, $user);
         $formUser->handleRequest($request);
 
         if($formUser->isSubmitted() && $formUser->isValid()){
@@ -51,7 +52,8 @@ class AccountController extends Controller
 
         return $this->render('utilisateur/update.html.twig',
             [
-                'form' => $formUser->createView()
+                'form' => $formUser->createView(),
+                'user' => $user
             ]
         );
     }

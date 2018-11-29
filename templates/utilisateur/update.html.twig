@@ -16,6 +16,10 @@
                     <button class="btn btn-success btn-lg" type="submit">Update</button>
                 </div>
                 {{ form_end(form) }}
+
+                {% if app.user.username is same as(user.username)%}
+                    {#TODO #} change password btn
+                {% endif %}
             </div>
         </div>
     </div>
