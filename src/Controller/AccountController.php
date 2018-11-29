@@ -89,10 +89,10 @@ class AccountController extends Controller
         $arrayIsPicture = [];
 
         foreach ($listeMedias as $media){
-            $isPicture = true;
-            if (!file_exists($media->getPicture().'.jpg') )
+            $isPicture = false;
+            if (file_exists('files/pictures/'.$media->getPicture().'.jpg') )
             {
-                $isPicture = false;
+                $isPicture = true;
             }
             array_push($arrayIsPicture,$isPicture);
         }

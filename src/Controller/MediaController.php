@@ -31,13 +31,12 @@ class MediaController extends Controller
 
         foreach ($listeMedias as $media){
             $isPicture = false;
-            if (file_exists('public/files/pictures/'.$media->getPicture().'.jpg') )
+            if (file_exists('files/pictures/'.$media->getPicture().'.jpg') )
             {
                 $isPicture = true;
             }
             array_push($arrayIsPicture,$isPicture);
         }
-
 
         return $this->render("media/liste.html.twig",[
             'listeMedias' => $listeMedias,
