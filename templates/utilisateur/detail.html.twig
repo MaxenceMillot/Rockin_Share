@@ -69,8 +69,15 @@
                                             <a href="{{ path('media_detail',{'id':media.id}) }}">
                                                 {{ media.name}}.{{ media.getExtension() }}
                                             </a>
-                                            </b> uploaded on <b>{{ media.dateCreated|date("d/m/Y") }}</b>
-
+                                        </b>
+                                        uploaded on <b>{{ media.dateCreated|date("d/m/Y") }}</b>
+                                        {% if is_granted('ROLE_ADMIN') or app.user.username is same as(user.name) %}
+                                        <div class="text-right">
+                                            <a data-toggle="modal" href="#confirm-delete3">
+                                                <img src="{{ asset('img/delete.png') }}" width="32" alt="external_link">
+                                            </a>
+                                        </div>
+                                        {% endif %}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -93,7 +100,7 @@
                     Do you really want to delete this user ?
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-success">Yes</a>
+                    <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-success">Yep</a>
                     <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
                 </div>
             </div>
@@ -112,6 +119,24 @@
                 </div>
                 <div class="modal-footer">
                     <a href="{{ path('account_delete') }}" class="btn btn-success">Yep</a>
+                    <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Modal 3 (media delete) #}
+    <div class="modal fade" id="confirm-delete-3">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                    Do you really want to delete this media ?
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ path('media_delete') }}" class="btn btn-success">Yep</a>
                     <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
                 </div>
             </div>

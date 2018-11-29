@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class MediaController extends Controller
 {
@@ -100,6 +101,31 @@ class MediaController extends Controller
         return $this->render('media/index.html.twig', [
             'controller_name' => 'MediaController',
         ]);
+    }
+
+    /**
+     * @Route("/media/delete/{id}", name="media_delete")
+     */
+    public function deleteMedia(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker, $id=0)
+    {
+        $repo = $em->getRepository(Media::class);
+
+        $media = $repo->findById($id);
+
+        $em->remove($media);
+        $em->flush();
+
+        $this->addFlash('success', "Media successfully deleted");
+
+        // Redirect to user details
+        if ($authChecker->isGranted('ROLE_ADMIN') === true) {
+
+            //TODO get user id to redirect
+            return $this->redirectToRoute('user_detail', ['id' => $idUser], 301);
+        }
+
+        return $this->redirectToRoute('account');
+
     }
 
     /**
