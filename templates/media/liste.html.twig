@@ -44,7 +44,9 @@
                             <td>
                                 <picture>
                                     {% if arrayIsPicture[loopValue] is same as(true)%}
-                                        <img class="img-thumbnail rounded mx-auto d-block mb-3" src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}">
+                                        <a href="{{ path('media_detail',{'id':media.id}) }}">
+                                            <img class="img-thumbnail rounded mx-auto d-block mb-3" src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}">
+                                        </a>
                                     {% else %}
                                         <img class="img-thumbnail rounded mx-auto d-block mb-3" height="128" width="128"src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
                                     {% endif %}
