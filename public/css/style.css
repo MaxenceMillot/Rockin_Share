@@ -11,6 +11,15 @@ html body {
     background-color: rgba(255,255,255,0.92);
 }
 
+.not-transparent{
+    background-color: rgba(255,255,255,1);
+}
+
+.liste-genres{
+    overflow-y: scroll;
+    height: 150px;
+}
+
 label{
     font-weight: bold;
 }

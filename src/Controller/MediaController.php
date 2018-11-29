@@ -98,16 +98,21 @@ class MediaController extends Controller
     public function detailMedia(EntityManagerInterface $em, $id = 0)
     {
         $repo = $em->getRepository(Media::class);
-
+        $isPicture = true;
         $media = $repo->find($id);
 
         $genres = $media->getGenre();
         $genre = $genres[0];
+        if (!$media->getPicture())
+        {
+            $isPicture = false;
+        }
 
         return $this->render('media/detail.html.twig',
             [
                 'media'=>$media,
-                'typeMedia' => $genre->gettypeMedia()->getName()
+                'typeMedia' => $genre->gettypeMedia()->getName(),
+                'isPicture' => $isPicture
             ]);
     }
 
