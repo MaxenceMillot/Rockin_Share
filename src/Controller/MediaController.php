@@ -45,6 +45,8 @@ class MediaController extends Controller
      */
     public function createMedia(EntityManagerInterface $em,Request $request)
     {
+
+
         $media = new Media();
         $formMedia = $this->createForm(MediaType::class,$media);
         $media->setUtilisateur($this->getUser());
@@ -76,12 +78,14 @@ class MediaController extends Controller
                     die();
                 }
 
-                // Move the file to the directory where pictures are stored
-                try {
+                if($picture != null) {
+                    // Move the file to the directory where pictures are stored
+                    try {
 
-                    $picture->move('files/pictures', $pictureName . '.jpg');
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                        $picture->move('files/pictures', $pictureName . '.jpg');
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
                 }
                 $em->flush();
                 $this->addFlash('success', "The media has been created !");

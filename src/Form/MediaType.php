@@ -37,7 +37,9 @@ class MediaType extends AbstractType
             ->add('name')
             ->add('description', TextareaType::class)
             #->add('dateCreated')
-            ->add('picture',FileType::class)
+            ->add('picture',FileType::class,array(
+                'required' => false
+            ))
             #->add('extension')
             ->add('typeMedia', EntityType::class, array(
                 'class' => TypeMedia::class,
