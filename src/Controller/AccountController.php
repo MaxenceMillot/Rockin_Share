@@ -19,6 +19,10 @@ class AccountController extends Controller
     public function userDetail(EntityManagerInterface $em){
         $repo = $em->getRepository(Media::class);
 
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $user = $this->getUser();
         $id =  $user->getId();
 
@@ -100,6 +104,10 @@ class AccountController extends Controller
      */
     public function deleteAccount(EntityManagerInterface $em)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $user = $this->getUser();
 
         $em->remove($user);
@@ -118,6 +126,10 @@ class AccountController extends Controller
      */
     public function listMyMedia(EntityManagerInterface $em)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
         $user = $this->getUser();
         $id =  $user->getId();
 
