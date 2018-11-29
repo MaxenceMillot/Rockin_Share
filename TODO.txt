@@ -7,8 +7,8 @@ MyList:
     - do everything
 
 Media:
-    -
+    - do crap
 
 Others:
     - Send mails
-    - Ajouter player (media_detail)
+    - Ajouter media player
