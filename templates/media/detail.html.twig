@@ -4,61 +4,68 @@
 
 {% block content %}
     <div class="container">
+    {% if typeMedia == "Musique" %}
         <div class="row">
-                {% if typeMedia == "Musique" %}
-                    <div class="col-md-6 text-center card mt-5 ">
-                        <h1 class="my-2 patua">
-                            {{ media.name}}
-                        </h1>
-                        <img src="{{ asset ('files/pictures/'~media.picture ~ '.jpg') }}" class="mx-auto" width="400" height="400" alt="{{ media.name }}">
-                        <audio controls="controls" class="mx-auto">
-                            <source src="{{ asset('files/medias/'~ media.id ~'.'~ media.extension ) }}" type="audio/{{ media.extension }}" />
-                            Your browser does not support the audio tag.
-                        </audio>
-                    </div>
-                    <div class="col-md-5" >
-                        <div class="col-md-12" style="width: 500px; height: 100px">
-                        </div>
-                        <div class="text-center card mt-5 col-md-12" style="width: 500px">
-                            <h2>Author</h2>
-                            <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
-                        </div>
-                        <div class="text-center card mt-2 col-md-12" style="width: 500px">
-                            <h2>Description</h2>
-                            <div><p>{{ media.description }}</p></div>
-                        </div>
-                    </div>
-
-                {% elseif typeMedia == "Film" %}
-
-                    <div class="text-center mt-3 col-md-2" style="width: 500px">
-                        <div class="col-md-12" style="width: 100px; height: 100px">
-
-                        </div>
-                        <div class="card"> <h2>Author</h2>
-                            <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
-                        </div>
-                    </div>
-                    <div class="col-md-8 text-center card mx-auto mt-5 pb-3">
-                        <h1 class="my-2 patua">
-                            {{ media.name}}
-                        </h1>
-                        <video width="640" height="360" class="mx-auto" controls>
-                            <source src="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" type="video/{{ media.extension }}">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div class="col-md-12" >
-                        <div class="text-center card mt-2 col-md-12" style="width: 500px">
-                            <h2>Description</h2>
-                            <div><p>{{ media.description }}</p></div>
-
-                        </div>
-                    </div>
-                {% elseif typeMedia == "Image" %}
-                {% else %}
-                {% endif %}
+            <div class="col-md-6 text-center card mt-5 ">
+                <h1 class="my-2 patua">
+                    {{ media.name}}
+                </h1>
+                <img src="{{ asset ('files/pictures/'~media.picture ~ '.jpg') }}" class="mx-auto" width="400" height="400" alt="{{ media.name }}">
+                <audio controls="controls" class="mx-auto">
+                    <source src="{{ asset('files/medias/'~ media.id ~'.'~ media.extension ) }}" type="audio/{{ media.extension }}" />
+                    Your browser does not support the audio tag.
+                </audio>
+            </div>
+            <div class="col-md-5" >
+                <div class="col-md-12" style="width: 500px; height: 100px">
+                </div>
+                <div class="text-center card mt-5 col-md-12" style="width: 500px">
+                    <h2>Author</h2>
+                    <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
+                </div>
+                <div class="text-center card mt-2 col-md-12" style="width: 500px">
+                    <h2>Description</h2>
+                    <div><p>{{ media.description }}</p></div>
+                </div>
+            </div>
         </div>
+
+    {% elseif typeMedia == "Film" %}
+
+        <div class="row">
+            <div class="col-md-8 text-center card mx-auto mt-5 pb-3">
+                <h1 class="my-2 patua">
+                    {{ media.name}}
+                </h1>
+                <video width="640" height="360" class="mx-auto" controls>
+                    <source src="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" type="video/{{ media.extension }}">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-center mt-3 mx-left col-md-6" style="width: 500px">
+                <div class="card"> <h2>Author</h2>
+                    <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-5 text-center float-md-right card mt-3 w-100 mw-100" style="width: 500px">
+                    <h2>Description</h2>
+                    <div><p>{{ media.description }}</p></div>
+                </div>
+            </div>
+        </div>
+    {% elseif typeMedia == "Image" %}
+        <div class="row">
+            <div class="col-md-6 card mx-auto text-center">
+                <h1 class="my-2 patua ">{{ media.name }}</h1>
+                <img src="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" alt="{{ media.name }}">
+            </div>
+        </div>
+    {% else %}
+    {% endif %}
+
     </div>
 
 
