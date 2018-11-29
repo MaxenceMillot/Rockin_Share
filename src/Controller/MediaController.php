@@ -41,12 +41,10 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/account/media/create", name="media_create")
+     * @Route("/media/create/", name="media_create")
      */
     public function createMedia(EntityManagerInterface $em,Request $request)
     {
-
-
         $media = new Media();
         $formMedia = $this->createForm(MediaType::class,$media);
         $media->setUtilisateur($this->getUser());

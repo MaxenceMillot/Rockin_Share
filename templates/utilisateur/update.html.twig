@@ -6,20 +6,33 @@
     <div class="container">
         <div class="row mx-auto">
             <div class="col-md-6 card mx-auto mt-3 p-2">
-                <h1 class="text-center patua">Edit Type</h1>
+                <h1 class="text-center patua">Edit User</h1>
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
                 {% if is_granted('ROLE_ADMIN') %}
                    {#TODO #} change role
                 {% endif %}
-                <div class="text-center">
-                    <button class="btn btn-success btn-lg" type="submit">Update</button>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <button class="btn btn-success btn-lg" type="submit">Update</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            {% if app.user.username is same as(user.username)%}
+                                <div class="text-center">
+                                    <a href="{{ path('account_update_password') }}" class="btn btn-warning btn-lg">Change Password</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
+
                 {{ form_end(form) }}
 
-                {% if app.user.username is same as(user.username)%}
-                    {#TODO #} change password btn
-                {% endif %}
+
             </div>
         </div>
     </div>

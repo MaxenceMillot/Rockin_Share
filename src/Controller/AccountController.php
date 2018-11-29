@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Media;
+use App\Form\EditPasswordType;
 use App\Form\EditUtilisateurType;
-use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AccountController extends Controller
 {
@@ -51,6 +52,38 @@ class AccountController extends Controller
         }
 
         return $this->render('utilisateur/update.html.twig',
+            [
+                'form' => $formUser->createView(),
+                'user' => $user
+            ]
+        );
+    }
+
+    /**
+     * @Route("/account/update/password", name="account_update_password")
+     */
+    public function passwordUpdate(EntityManagerInterface $em, Request $request, UserPasswordEncoderInterface $encoder)
+    {
+        $user = $this->getUser();
+
+        $formUser= $this->createForm(EditPasswordType::class, $user);
+        $formUser->handleRequest($request);
+
+        if($formUser->isSubmitted() && $formUser->isValid()){
+
+            // Crypter le MDP
+            $pass = $encoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($pass);
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash('success', "Your Password has been updated");
+
+            return $this->redirectToRoute('account');
+
+        }
+
+        return $this->render('utilisateur/editPassword.html.twig',
             [
                 'form' => $formUser->createView(),
                 'user' => $user
