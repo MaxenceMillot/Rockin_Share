@@ -31,7 +31,6 @@
                         <th scope="col" style="width: 25%">Type</th>
                         <th scope="col" style="width: 10%">view</th>
                         {% if is_granted('ROLE_ADMIN') or currentRoute == ('/Rockin_Share/public/account/mymedia/list') %}
-                            <th scope="col" style="width: 10%">Edit</th>
                             <th scope="col" style="width: 10%">delete</th>
                         {% endif %}
 
@@ -44,9 +43,7 @@
                             <td>
                                 <picture>
                                     {% if arrayIsPicture[loopValue] is same as(true)%}
-                                        <a href="{{ path('media_detail',{'id':media.id}) }}">
-                                            <img class="img-thumbnail rounded mx-auto d-block mb-3" src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}">
-                                        </a>
+                                        <img class="img-thumbnail rounded mx-auto d-block mb-3" src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}">
                                     {% else %}
                                         <img class="img-thumbnail rounded mx-auto d-block mb-3" height="128" width="128"src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
                                     {% endif %}
@@ -65,11 +62,6 @@
                             </td>
 
                             {% if is_granted('ROLE_ADMIN') or currentRoute == ('/Rockin_Share/public/account/mymedia/list') %}
-                                <td>
-                                    <a href="{{ path('media_update',{'id':media.id}) }}">
-                                        <img src="{{ asset('img/edit.png') }}" width="28" alt="view detail">
-                                    </a>
-                                </td>
                                 <td>
                                     <a class="confirm-delete-btn" data-toggle="modal" data-id="{{ media.id }}" href="#confirm-delete">
                                         <img src="{{ asset('img/delete.png') }}" width="32" alt="external_link">

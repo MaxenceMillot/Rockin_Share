@@ -6,7 +6,11 @@
     <div class="container">
         <div class="row mx-auto">
             <div class="col-md-6 card mx-auto mt-3 mb-3 p-3">
-                <h1 class="text-center patua">Create your media</h1>
+                {% if edit is same as(true) %}
+                    <h1 class="text-center patua">Edit your media</h1>
+                {% else %}
+                    <h1 class="text-center patua">Create your media</h1>
+                {% endif %}
                 {{ form_start(form) }}
 
                 <div class="form-group">
