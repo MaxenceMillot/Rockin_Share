@@ -10,6 +10,7 @@
                     <h1 class="my-2 patua">
                         {{ media.name}}
                     </h1>
+                    {% if is %}
                     <img class="img-thumbnail rounded mx-auto d-block mb-3" height="450" width="450" src="{{ asset('files/pictures/'~ media.picture ~'.jpg') }}" alt="{{ media.name }}">
                     <audio controls="controls" class="mx-auto">
                         <source src="{{ asset('files/medias/'~ media.id ~'.'~ media.extension ) }}" type="audio/{{ media.extension }}" />
