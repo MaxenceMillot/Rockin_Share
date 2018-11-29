@@ -132,8 +132,10 @@ class MediaController extends Controller
 
         // Redirect to user details
         if ($authChecker->isGranted('ROLE_ADMIN') === true) {
+            if($idUser == "0"){
+                return $this->redirectToRoute('media_list');
+            }
 
-            //TODO get user id to redirect
             return $this->redirectToRoute('user_detail', ['id' => $idUser], 301);
         }
 
