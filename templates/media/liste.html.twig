@@ -45,7 +45,7 @@
                                     {% if arrayIsPicture[loopValue] is same as(true)%}
                                         <img class="img-thumbnail rounded mx-auto d-block mb-3" src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}">
                                     {% else %}
-                                        <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
+                                        <img class="img-thumbnail rounded mx-auto d-block mb-3" height="128" width="128"src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
                                     {% endif %}
                                 </picture>
                             </td>
