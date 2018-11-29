@@ -52,7 +52,7 @@
         {% elseif typeMedia == "Film" %}
 
             <div class="row">
-                <div class="col-md-8 text-center card mx-auto mt-3 pb-3">
+                <div class="col-md-9 text-center card mx-auto mt-3 ">
                     <h1 class="my-2 patua">
                         {{ media.name}}
                     </h1>
@@ -60,37 +60,28 @@
                         <source src="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" type="video/{{ media.extension }}">
                         Your browser does not support the video tag.
                     </video>
-                </div>
-            </div>
-            <div class="row">
-                <div class="text-center mt-3 mx-left col-md-4" style="width: 500px">
-                    <div class="card"> <h2>Author</h2>
-                        <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
+                    <hr>
+                    <div class="row">
+                        <p class="text-left col-md-6">By <b>{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</b></p>
+                        <p class="text-right col-md-6">On <b>{{ media.dateCreated|date("d/m/Y") }}</b></p>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="text-center mt-4 font-weight-bold ">
-                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success btn-block">Download</a>
+                    <hr>
+                    <h3 class="text-left font-weight-bold">
+                        Genres :
+                    </h3>
+                    <div class="container mb-3">
+                        <div class="row">
+                            {% for genre in media.genre %}
+                                <div class="col-md-2 badge badge-info">{{ genre.name }}</div>
+                            {% endfor %}
+                        </div>
                     </div>
-                </div>
-                <div class="text-center mt-3 mx-left col-md-4" style="width: 500px">
-                    <div class="card"> <h2>Creation Date</h2>
-                        <div><h3 class="font-weight-bold">{{ media.dateCreated|date("d/m/Y") }}</h3></div>
+                    <hr>
+                    <h2 class="text-left font-weight-bold">Description :</h2>
+                    <p class="text-left">{{ media.description }}</p>
+                    <div class="text-center mt-1 font-weight-bold ">
+                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success ">Download</a>
                     </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="text-center card mt-2 col-md-5 mr-3" style="width: 500px">
-                    <ul class="list-group mt-2 mb-3 liste-genres">
-                        {% for genre in media.genre %}
-                            <li class="list-group-item">{{ genre.name }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="col-md-6 text-center card mt-3 mx-auto" style="width: 500px">
-                    <h2>Description</h2>
-                    <div><p>{{ media.description }}</p></div>
                 </div>
             </div>
         {% elseif typeMedia == "Image" %}

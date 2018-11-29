@@ -28,6 +28,7 @@ class MediaUpdateType extends AbstractType
             #->add('extension')
             ->add('genre', EntityType::class, array(
                 'class' => Genre::class,
+                'multiple' => true,
                 'query_builder' => function (GenreRepository $er) use($options) {
                     return $er->createQueryBuilder('g')
                         ->andWhere("g.typeMedia = :typeMedia")
