@@ -1,127 +1,66 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Detail utilisateur | {{ parent() }}{% endblock %}
+{% block title %}Detail media | {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="container">
-        <div class="row ">
-            <div class="col-md-8 card shadow mx-auto mt-4">
-
-                <div class="container mb-2">
-                    <div class="row">
-                        <div class="col-md-10 text-left">
-                            <h1 class="mt-2"><b>{{ user.username }}</b></h1>
-                        </div>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <div class="col-md-2 text-right mt-3">
-                                <a href="{{ path('user_update', {'id': user.id}) }}">
-                                    <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
-                                </a>
-                            </div>
-                        {% elseif app.user.id == user.id %}
-                            <div class="col-md-2 text-right mt-3">
-                                <a href="{{ path('account_update') }}">
-                                    <img src="{{ asset('img/edit.png') }}" width="32" alt="edit user">
-                                </a>
-                            </div>
-                        {% endif %}
+        <div class="row">
+                {% if typeMedia == "Musique" %}
+                    <div class="col-md-6 text-center card mt-5 ">
+                        <h1 class="my-2 patua">
+                            {{ media.name}}
+                        </h1>
+                        <img src="{{ asset ('files/pictures/'~media.picture ~ '.jpg') }}" class="mx-auto" width="400" height="400" alt="{{ media.name }}">
+                        <audio controls="controls" class="mx-auto">
+                            <source src="{{ asset('files/medias/'~ media.id ~'.'~ media.extension ) }}" type="audio/{{ media.extension }}" />
+                            Your browser does not support the audio tag.
+                        </audio>
                     </div>
-                </div>
-
-                <h3><u>Infos:</u></h3>
-
-                <div class="card-body">
-                    <ul class="list-group list-group-flush rounded shadow">
-                        <li class="list-group-item ">Lastname:  <b>{{ user.lastname }}</b></li>
-                        <li class="list-group-item">Firstname: <b>{{ user.firstname }}</b></li>
-                        <li class="list-group-item">Email: <b>{{ user.email }}</b></li>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="list-group-item ">Role:
-                                {% for role in user.roles %}
-                                    <b>{{ role }}</b>
-                                {% endfor %}
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-                <h3><u>Medias:</u></h3>
-
-                <div class="card-body text-center">
-                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <img src="{{ asset('img/sort-down.png') }}" alt="show medias">
-                    </a>
-
-                    <div class="collapse" id="collapseExample">
-                        <div class="card card-body">
-                            <ul class="list-group list-group-flush rounded shadow">
-                                {% for media in medias %}
-                                    <li class="list-group-item "><b>{{ media.name}}</b> uploaded on <b>{{ media.dateCreated|date("d/m/Y") }}</b>
-                                        {# TODO<li class="list-group-item"> <b>{{ media.getGenre().getType().name }}</b></li>#}
-                                        <a href="{{ path('media_detail',{'id':media.id}) }}">
-                                            <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                    <div class="col-md-5" >
+                        <div class="col-md-12" style="width: 500px; height: 100px">
+                        </div>
+                        <div class="text-center card mt-5 col-md-12" style="width: 500px">
+                            <h2>Author</h2>
+                            <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
+                        </div>
+                        <div class="text-center card mt-2 col-md-12" style="width: 500px">
+                            <h2>Description</h2>
+                            <div><p>{{ media.description }}</p></div>
                         </div>
                     </div>
-                </div>
 
-                {% if is_granted('ROLE_ADMIN') %}
-                    <div class="text-right mr-3 mb-3">
-                        <a data-toggle="modal" href="#confirm-delete">
-                            <img src="{{ asset('img/delete.png') }}" width="32" alt="external_link">
-                        </a>
+                {% elseif typeMedia == "Film" %}
+
+                    <div class="text-center mt-3 col-md-2" style="width: 500px">
+                        <div class="col-md-12" style="width: 100px; height: 100px">
+
+                        </div>
+                        <div class="card"> <h2>Author</h2>
+                            <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
+                        </div>
                     </div>
-                {% elseif app.user.id == user.id %}
-                    <div class="text-right mr-3 mb-3">
-                        <a data-toggle="modal" href="#confirm-delete-2">
-                            <img src="{{ asset('img/delete.png') }}" width="32" alt="external_link">
-                        </a>
+                    <div class="col-md-8 text-center card mx-auto mt-5 pb-3">
+                        <h1 class="my-2 patua">
+                            {{ media.name}}
+                        </h1>
+                        <video width="640" height="360" class="mx-auto" controls>
+                            <source src="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" type="video/{{ media.extension }}">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
+                    <div class="col-md-12" >
+                        <div class="text-center card mt-2 col-md-12" style="width: 500px">
+                            <h2>Description</h2>
+                            <div><p>{{ media.description }}</p></div>
+
+                        </div>
+                    </div>
+                {% elseif typeMedia == "Image" %}
+                {% else %}
                 {% endif %}
-
-            </div>
-        </div>
-
-    </div>
-    </div>
-
-    {# Modal #}
-    <div class="modal fade" id="confirm-delete">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">x</button>
-                </div>
-                <div class="modal-body">
-                    Do you really want to delete this user ?
-                </div>
-                <div class="modal-footer">
-                    <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-success">Yes</a>
-                    <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
-                </div>
-            </div>
         </div>
     </div>
 
-    {# Modal 2 (self delete) #}
-    <div class="modal fade" id="confirm-delete-2">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">x</button>
-                </div>
-                <div class="modal-body">
-                    Do you really want to delete your account ?
-                </div>
-                <div class="modal-footer">
-                    <a href="{{ path('account_delete') }}" class="btn btn-success">Yep</a>
-                    <button class="btn btn-danger" data-dismiss="modal">Nope !</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 {% endblock %}

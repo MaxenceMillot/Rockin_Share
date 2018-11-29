@@ -23,16 +23,11 @@
                     <tbody>
                     {% for media in listeMedias %}
                         <tr class="text-center" id="table-media">
-                                <td><img src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}"> </td>
-                                <td class="font-weight-bold">{{ media.name }}</td>
-                            {% set genres = media.getGenre().getValues() %}
-                            {% set count = 0 %}
-                            {% for genre in genres if count == 0 %}
-                                <td>{{ genre.typeMedia.name }}</td>
-                                {% set count = 1 %}
-                            {% endfor %}
+                            <td><img src="{{ asset('files/pictures/' ~ media.getPicture()) }}.jpg" width="128" alt="{{ media.name }}"> </td>
+                            <td class="font-weight-bold">{{ media.name }}</td>
+                            <td>{{ media.getGenre()|first.getTypeMedia().name }}</td>
                             <td>
-                                <a href="{{ path('user_detail',{'id':media.id}) }}">
+                                <a href="{{ path('media_detail',{'id':media.id}) }}">
                                     <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
                                 </a>
                             </td>

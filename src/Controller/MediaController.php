@@ -95,11 +95,20 @@ class MediaController extends Controller
     /**
      * @Route("/media/detail/{id}", name="media_detail")
      */
-    public function detailMedia()
+    public function detailMedia(EntityManagerInterface $em, $id = 0)
     {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
+        $repo = $em->getRepository(Media::class);
+
+        $media = $repo->find($id);
+
+        $genres = $media->getGenre();
+        $genre = $genres[0];
+
+        return $this->render('media/detail.html.twig',
+            [
+                'media'=>$media,
+                'typeMedia' => $genre->gettypeMedia()->getName()
+            ]);
     }
 
     /**
