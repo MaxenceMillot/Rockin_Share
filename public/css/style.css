@@ -33,8 +33,10 @@ label{
     size: 100px;
 }
 
-.list-group-flush{
+
+.scrollable-list{
     overflow-y: scroll;
+    max-height: 175px;
 }
 
 .home-img{

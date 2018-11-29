@@ -7,8 +7,9 @@ MyList:
     - do everything
 
 Media:
-    -
+    - Trier les listes par types/dates
+    - Tri dynamique sur click header
 
 Others:
     - Send mails
-    - Ajouter player (media_detail)
+    - Ajouter media player
