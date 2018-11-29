@@ -28,7 +28,7 @@
                         <div><h3>{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
                     </div>
                     <div class="text-center card mt-2 col-md-12" style="width: 500px">
-                        <h2 class="font-weight-bold">Date de création</h2>
+                        <h2 class="font-weight-bold">Creation Date</h2>
                         <div><h3 >{{ media.dateCreated|date("d/m/Y")}}</h3></div>
                     </div>
                     <div class="text-center card mt-2 col-md-12" style="width: 500px">
@@ -44,7 +44,7 @@
                         </ul>
                     </div>
                     <div class="text-center mt-2 font-weight-bold ">
-                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success">Télécharger</a>
+                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success">Download</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="text-center mt-4 font-weight-bold ">
-                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success btn-block">Télécharger</a>
+                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success btn-block">Download</a>
                     </div>
                 </div>
                 <div class="text-center mt-3 mx-left col-md-4" style="width: 500px">
@@ -104,6 +104,10 @@
                         <h2>Author</h2>
                         <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
                     </div>
+                    <div class="text-center card mt-2 col-md-12" style="width: 500px">
+                        <h2 class="font-weight-bold">Creation Date</h2>
+                        <div><h3 >{{ media.dateCreated|date("d/m/Y")}}</h3></div>
+                    </div>
                     <div class="text-center card mt-2 col-md-12 bg-light shadow" style="width: 500px">
                         <h2>Description</h2>
                         <div><p>{{ media.description }}</p></div>
@@ -116,7 +120,7 @@
                         </ul>
                     </div>
                     <div class="text-center mt-5 font-weight-bold ">
-                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success">Télécharger</a>
+                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success">Download</a>
                     </div>
 
                 </div>

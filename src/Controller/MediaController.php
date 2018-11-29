@@ -5,11 +5,16 @@ namespace App\Controller;
 use App\Entity\Media;
 use App\Form\MediaType;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Repository\GenreRepository;
+use App\Entity\Genre;
 
 class MediaController extends Controller
 {
@@ -41,7 +46,7 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/account/media/create", name="media_create")
+     * @Route("/media/create", name="media_create")
      */
     public function createMedia(EntityManagerInterface $em,Request $request)
     {
@@ -78,12 +83,14 @@ class MediaController extends Controller
                     die();
                 }
 
-                // Move the file to the directory where pictures are stored
-                try {
+                if($picture != null) {
+                    // Move the file to the directory where pictures are stored
+                    try {
 
-                    $picture->move('files/pictures', $pictureName . '.jpg');
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                        $picture->move('files/pictures', $pictureName . '.jpg');
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
                 }
                 $em->flush();
                 $this->addFlash('success', "The media has been created !");
