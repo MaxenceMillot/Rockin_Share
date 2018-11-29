@@ -43,39 +43,47 @@ class MediaController extends Controller
         $media->setExtension("");
         $formMedia->handleRequest($request);
         if ($formMedia->isSubmitted() && $formMedia->isValid()) {
+
             $file = $request->files->get('uploadedFile');
-            $fileExtension = $file->getClientOriginalExtension();
+            if ($file != null) {
+                $fileExtension = $file->getClientOriginalExtension();
 
-            $media->setExtension($fileExtension);
+                $media->setExtension($fileExtension);
 
-            $picture = array_values($request->files->get('media'))[0];
+                $picture = array_values($request->files->get('media'))[0];
 
-            $pictureName = $this->generateUniquePictureName();
-            $media->setPicture($pictureName);
+                $pictureName = $this->generateUniquePictureName();
+                $media->setPicture($pictureName);
 
-            $em->persist($media);
-            $em->flush();
+                $em->persist($media);
+                $em->flush();
 
-            // Move the file to the directory where medias are stored
-            try {
-                $file->move('files/medias',$media->getId().'.'.$fileExtension);
+                // Move the file to the directory where medias are stored
+                try {
+                    $file->move('files/medias', $media->getId() . '.' . $fileExtension);
 
-            } catch (FileException $e) {
-                $this->addFlash('danger',phpinfo());
-                die();
+                } catch (FileException $e) {
+                    $this->addFlash('danger', phpinfo());
+                    die();
+                }
+
+                // Move the file to the directory where pictures are stored
+                try {
+
+                    $picture->move('files/pictures', $pictureName . '.jpg');
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $em->flush();
+                $this->addFlash('success', "The media has been created !");
+
+                return $this->redirectToRoute('media_list');
             }
-
-            // Move the file to the directory where pictures are stored
-            try {
-
-                $picture->move('files/pictures',$pictureName.'.jpg');
-            } catch (FileException $e) {
-                // ... handle exception if something happens during file upload
+            else
+            {
+                $this->addFlash('danger', "tu m'prend pour un con ?");
+                $this->redirectToRoute('media_create');
             }
-            $em->flush();
-            $this->addFlash('success',"The media has been created !");
-
-            return $this->redirectToRoute('media_list');
         }
 
         return $this->render(
