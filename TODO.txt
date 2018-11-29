@@ -7,7 +7,8 @@ MyList:
     - do everything
 
 Media:
-    - do crap
+    - Trier les listes par types/dates
+    - Tri dynamique sur click header
 
 Others:
     - Send mails

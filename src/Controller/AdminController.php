@@ -180,7 +180,7 @@ class AdminController extends Controller
         $repo_genre = $em->getRepository(Genre::class);
         $repo_type = $em->getRepository(TypeMedia::class);
 
-        $genres = $repo_genre->findAll();
+        $genres = $repo_genre->findAllOrder();
         $types = $repo_type->findAll();
 
         return $this->render("genre/list.html.twig",

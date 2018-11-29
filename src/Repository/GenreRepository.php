@@ -20,10 +20,19 @@ class GenreRepository extends ServiceEntityRepository
         parent::__construct($registry, Genre::class);
     }
 
+    public function findAllOrder(){
+        return $this->createQueryBuilder('g')
+            ->innerJoin('g.typeMedia','type')
+            ->addOrderBy('g.typeMedia', 'ASC')
+            ->addOrderBy('g.name', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+/*
     public function findFirstTen(int $id){
         $em = $this->getEntityManager();
 
-        /* DQL Method */
         $dql = "SELECT genre FROM App\Entity\Genre AS genre INNER JOIN App\Entity\TypeMedia AS type WHERE genre.id = type.id AND type.id = :id";
         $query = $em->createQuery($dql);
 
@@ -43,6 +52,7 @@ class GenreRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+    */
 
     public function findOneOrNullByTypeMedia($idType)
     {

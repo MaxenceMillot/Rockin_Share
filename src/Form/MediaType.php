@@ -44,7 +44,8 @@ class MediaType extends AbstractType
                 'placeholder' => '',
                 'mapped' => false,
                 'choice_label' => 'name'
-            ));
+            ))
+        ;
 
         $formModifier = function (FormInterface $form, TypeMedia $typeMedia = null) {
             $genres = null === $typeMedia ? array() : $typeMedia->getGenres();

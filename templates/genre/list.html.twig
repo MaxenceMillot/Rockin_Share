@@ -53,7 +53,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for genre in genres|sort %}
+            {% for genre in genres %}
                 {% if idTypeMedia is not null and idTypeMedia == genre.typeMedia.id %}
                     <tr>
                         <td>{{ genre.name }}</td>
