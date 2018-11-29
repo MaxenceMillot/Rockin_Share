@@ -137,34 +137,4 @@ class AccountController extends Controller
             'arrayIsPicture' => $arrayIsPicture
         ]);
     }
-
-    /**
-     * @Route("/account/mymedia/detail/{id}", name="myMedia_detail")
-     */
-    public function detailMyMedia()
-    {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
-    }
-
-    /**
-     * @Route("/account/mymedia/update/{id}", name="myMedia_update")
-     */
-    public function updateMyMedia()
-    {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
-    }
-
-    /**
-     * @Route("/account/mymedia/delete/{id}", name="myMedia_delete")
-     */
-    public function deleteMyMedia()
-    {
-        return $this->render('media/index.html.twig', [
-            'controller_name' => 'MediaController',
-        ]);
-    }
 }
