@@ -33,6 +33,7 @@ class MediaType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('name')
             ->add('description', TextareaType::class)
@@ -45,6 +46,7 @@ class MediaType extends AbstractType
                 'class' => TypeMedia::class,
                 'placeholder' => '',
                 'mapped' => false,
+
                 'choice_label' => 'name'
             ))
         ;

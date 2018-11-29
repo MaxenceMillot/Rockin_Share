@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Media;
 use App\Form\MediaType;
+use App\Form\MediaUpdateType;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -106,7 +107,74 @@ class MediaController extends Controller
 
         return $this->render(
             'media/form.html.twig',
-            array('form' => $formMedia->createView())
+            array('form' => $formMedia->createView(),
+                  'edit' => false)
+        );
+    }
+
+    /**
+     * @Route("/media/update/{id}", name="media_update")
+     */
+    public function updateMedia(EntityManagerInterface $em,Request $request,$id=0)
+    {
+        $repo = $em->getRepository(Media::class);
+        $media = $repo->find($id);
+
+        $formMedia = $this->createForm(MediaUpdateType::class,$media);
+        $media->setUtilisateur($this->getUser());
+        $media->setDateCreated( new \DateTime());
+        $media->setExtension("");
+        $formMedia->handleRequest($request);
+        if ($formMedia->isSubmitted() && $formMedia->isValid()) {
+
+            $file = $request->files->get('uploadedFile');
+            if ($file != null) {
+                $fileExtension = $file->getClientOriginalExtension();
+
+                $media->setExtension($fileExtension);
+
+                $picture = array_values($request->files->get('media'))[0];
+
+                $pictureName = $this->generateUniquePictureName();
+                $media->setPicture($pictureName);
+
+                $em->persist($media);
+                $em->flush();
+
+                // Move the file to the directory where medias are stored
+                try {
+                    $file->move('files/medias', $media->getId() . '.' . $fileExtension);
+
+                } catch (FileException $e) {
+                    $this->addFlash('danger', phpinfo());
+                    die();
+                }
+
+                if($picture != null) {
+                    // Move the file to the directory where pictures are stored
+                    try {
+
+                        $picture->move('files/pictures', $pictureName . '.jpg');
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+                }
+                $em->flush();
+                $this->addFlash('success', "The media has been created !");
+
+                return $this->redirectToRoute('media_list');
+            }
+            else
+            {
+                $this->addFlash('danger', "Vous devez remplir les champs nécessaires à la création d'un média");
+                $this->redirectToRoute('media_create');
+            }
+        }
+
+        return $this->render(
+            'media/form.html.twig',
+            array('form' => $formMedia->createView(),
+                  'edit' => true)
         );
     }
 
