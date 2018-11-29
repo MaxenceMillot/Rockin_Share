@@ -118,14 +118,13 @@ class MediaController extends Controller
     }
 
     /**
-     * @Route("/media/delete/{id}", name="media_delete")
+     * @Route("/media/delete/{idUser}/{idMedia}", name="media_delete")
      */
-    public function deleteMedia(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker, $id=0)
+    public function deleteMedia(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker, $idUser=0, $idMedia=0)
     {
         $repo = $em->getRepository(Media::class);
 
-        $media = $repo->findById($id);
-
+        $media = $repo->find($idMedia);
         $em->remove($media);
         $em->flush();
 
