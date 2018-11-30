@@ -23,7 +23,7 @@ class MediaController extends Controller
         $repo = $em->getRepository(Media::class);
 
 
-        $listeMedias = $repo->findAll();
+        $listeMedias = $repo->findAllOrder();
         $arrayIsPicture = [];
 
         foreach ($listeMedias as $media){

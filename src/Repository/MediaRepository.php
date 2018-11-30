@@ -19,22 +19,17 @@ class MediaRepository extends ServiceEntityRepository
         parent::__construct($registry, Media::class);
     }
 
-    // /**
-    //  * @return Media[] Returns an array of Media objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
+    public function findAllOrder(){
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->innerJoin('m.genres','g')
+            ->innerJoin('g.typeMedia','t')
+            ->addOrderBy('g.typeMedia', 'ASC')
+            ->addOrderBy('g.name', 'ASC')
+            ->addOrderBy('m.dateCreated', 'ASC')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
 
     public function findOneOrNullByGenre($idGenre)
     {
