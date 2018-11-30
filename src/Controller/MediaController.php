@@ -44,9 +44,13 @@ class MediaController extends Controller
     /**
      * @Route("/media/create/", name="media_create")
      */
-    public function createMedia(EntityManagerInterface $em,Request $request)
+    public function createMedia(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker, Request $request)
     {
+        if (!$authChecker->isGranted('ROLE_USER')) {
 
+            $this->addFlash('danger', "Please, login to your account to process");
+            return $this->redirectToRoute('login');
+        }
 
         $media = new Media();
         $formMedia = $this->createForm(MediaType::class,$media);
@@ -110,8 +114,13 @@ class MediaController extends Controller
     /**
      * @Route("/media/update/{id}", name="media_update")
      */
-    public function updateMedia(EntityManagerInterface $em,Request $request,$id=0)
+    public function updateMedia(EntityManagerInterface $em,Request $request, AuthorizationCheckerInterface $authChecker,$id=0)
     {
+        if (!$authChecker->isGranted('ROLE_USER')) {
+            $this->addFlash('error', "Please, login to your account to process");
+            return $this->redirectToRoute('login');
+        }
+
         $repo = $em->getRepository(Media::class);
         $media = $repo->find($id);
 
@@ -202,9 +211,25 @@ class MediaController extends Controller
      */
     public function deleteMedia(EntityManagerInterface $em, AuthorizationCheckerInterface $authChecker, $idUser=0, $idMedia=0)
     {
+        if (!$authChecker->isGranted('ROLE_USER')) {
+            $this->addFlash('error', "Please, login to your account to process");
+            return $this->redirectToRoute('login');
+        }
+
         $repo = $em->getRepository(Media::class);
 
         $media = $repo->find($idMedia);
+
+        // Check if is admin or if media belong to user
+        if ($authChecker->isGranted('ROLE_ADMIN') === true) {
+            //is ok
+        }elseif($this->getUser()->getId() == $media->getUtilisateur()->getId()){
+            //is ok
+        }else{
+            $this->addFlash('danger', "Sorry, you cannot delete other users medias");
+            return $this->redirectToRoute('media_list');
+        }
+
         $em->remove($media);
         $em->flush();
 
@@ -228,7 +253,7 @@ class MediaController extends Controller
      */
     public function mediaUpdate(EntityManagerInterface $em, Request $request, $id=0)
     {
-        //TODO: Get this to work => Kylian
+
         $repo = $em->getRepository(Media::class);
 
         $media = $repo->find($id);
