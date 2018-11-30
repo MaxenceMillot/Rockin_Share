@@ -27,7 +27,11 @@
                             </form>
                         </div>
 
-                        <div class="col-md-6 mx-auto text-center">
+                        <div class="col-md-4  pt-3">
+                            <input type="text" id="myInput" class="form-control" onkeyup="filterTable()" placeholder="Search..." title="Type in a name">
+                        </div>
+
+                        <div class="col-md-4 mx-auto text-center">
                             <a class="hvr-grow" href="{{ path('genre_create') }}">
                                 <img width="64" src="{{ asset('img/plus2.svg') }}" alt="add">
                             </a>
@@ -43,7 +47,7 @@
 
 
     <div class="col-md-6 mx-auto">
-        <table class="table table-hover bg-light">
+        <table id="myTable" class="table table-hover bg-light">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Name</th>

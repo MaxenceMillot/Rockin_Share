@@ -10,8 +10,12 @@
                 <h1 class="patua">Utilisateurs</h1>
             </div>
 
+            <div class="col-md-4 mx-auto text-center mb-3  pt-3">
+                <input type="text" id="myInput" class="form-control" onkeyup="filterTable()" placeholder="Search..." title="Type in a name">
+            </div>
+
             <div class="col-md-10 mx-auto">
-                <table class="table table-hover bg-white">
+                <table id="myTable" class="table table-hover bg-white">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">Nom</th>
