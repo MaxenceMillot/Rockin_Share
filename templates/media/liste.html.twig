@@ -51,7 +51,11 @@
                             </td>
                             <td class="font-weight-bold">{{ media.name }}</td>
                             {% if currentRoute != ('/Rockin_Share/public/account/mymedia/list') %}
-                                <td>{{ media.getUtilisateur().username }}</td>
+                                <td>
+                                    <a href="{{ path('user_view',{'id':media.getUtilisateur().id}) }}">
+                                        {{ media.getUtilisateur().username }}
+                                    </a>
+                                </td>
                                 <td>{{ media.dateCreated|date("d/m/Y")}}</td>
                             {% endif %}
                             <td>{{ media.getGenre()|first.getTypeMedia().name }}</td>

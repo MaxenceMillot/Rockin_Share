@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Media;
+use App\Entity\Utilisateur;
 use App\Form\EditPasswordType;
 use App\Form\EditUtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -117,6 +118,23 @@ class AccountController extends Controller
 
         $this->addFlash('success', "Account successfully deleted");
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/account/user/view/{id}", name="user_view")
+     */
+    public function uploaderDetail(EntityManagerInterface $em, $id=0){
+        $repo = $em->getRepository(Utilisateur::class);
+        $repo2 = $em->getRepository(Media::class);
+
+        $user = $repo->find($id);
+        $medias = $repo2->findAllByUser($id);
+
+        return $this->render('utilisateur/detail.html.twig',
+            [
+                'user'=>$user,
+                'medias'=>$medias
+            ]);
     }
 
 
