@@ -49,7 +49,8 @@
                         <th scope="col" style="width: 25%">Type</th>
                         <th scope="col" style="width: 10%">view</th>
                         {% if is_granted('ROLE_ADMIN') or currentRoute == ('/Rockin_Share/public/account/mymedia/list') %}
-                            <th scope="col" style="width: 10%">delete</th>
+                            <th scope="col" style="width: 10%">Update</th>
+                            <th scope="col" style="width: 10%">Delete</th>
                         {% endif %}
 
                     </tr>
@@ -82,6 +83,14 @@
                                     <img src="{{ asset('img/external.png') }}" width="28" alt="view detail">
                                 </a>
                             </td>
+
+                            {% if is_granted('ROLE_ADMIN') or currentRoute == ('/Rockin_Share/public/account/mymedia/list') %}
+                                <td>
+                                    <a href="{{ path('media_update',{'id':media.id}) }}">
+                                        <img src="{{ asset('img/edit.png') }}" width="32" alt="external_link">
+                                    </a>
+                                </td>
+                            {% endif %}
 
                             {% if is_granted('ROLE_ADMIN') or currentRoute == ('/Rockin_Share/public/account/mymedia/list') %}
                                 <td>

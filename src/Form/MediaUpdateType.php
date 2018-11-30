@@ -21,10 +21,10 @@ class MediaUpdateType extends AbstractType
             ->add('name')
             ->add('description', TextareaType::class)
             #->add('dateCreated')
-            ->add('picture',FileType::class,array(
-                'required' => false,
-                'data_class' => null
-            ))
+            #->add('picture',FileType::class,array(
+            #    'required' => false,
+            #    'data_class' => null
+            #))
             #->add('extension')
             ->add('genre', EntityType::class, array(
                 'class' => Genre::class,

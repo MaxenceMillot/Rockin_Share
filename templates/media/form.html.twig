@@ -13,15 +13,16 @@
                 {% endif %}
                 {{ form_start(form) }}
 
-                <div class="form-group">
-                    <label for="uploadedFile">File</label>
-                    {% if edit is same as(true) %}
-                        <input type="file" class="form-control-file" id="uploadedFile" name="uploadedFile">
-                    {% else %}
-                        <input type="file" class="form-control-file" id="uploadedFile" name="uploadedFile" required="required">
-                    {% endif %}
 
-                </div>
+                {% if edit is same as(true) %}
+                {% else %}
+                    <div class="form-group">
+                        <label for="uploadedFile">File</label>
+                        <input type="file" class="form-control-file" id="uploadedFile" name="uploadedFile" required="required">
+                    </div>
+                {% endif %}
+
+
 
                 {{ form_widget(form) }}
                 <small class="form-text text-muted">Vous pouvez ajouter plusieurs genres en maintenant la touche 'Ctrl' appuyée</small>

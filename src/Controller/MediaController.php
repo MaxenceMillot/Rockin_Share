@@ -99,7 +99,7 @@ class MediaController extends Controller
             }
             else
             {
-                $this->addFlash('danger', "tu m'prend pour un con ?");
+                $this->addFlash('danger', "Please complete all fields to create a media");
                 $this->redirectToRoute('media_create');
             }
         }
@@ -124,56 +124,30 @@ class MediaController extends Controller
         $repo = $em->getRepository(Media::class);
         $media = $repo->find($id);
 
+        // Check if is admin or if media belong to user
+        if ($authChecker->isGranted('ROLE_ADMIN') === true) {
+            //is ok
+        }elseif($this->getUser()->getId() == $media->getUtilisateur()->getId()){
+            //is ok
+        }else{
+            $this->addFlash('danger', "Sorry, you cannot delete other users medias");
+            return $this->redirectToRoute('media_list');
+        }
+
         $formMedia = $this->createForm(MediaUpdateType::class,$media);
-        $media->setUtilisateur($this->getUser());
-        $media->setDateCreated( new \DateTime());
-        $media->setExtension("");
 
         $formMedia->handleRequest($request);
+
         if ($formMedia->isSubmitted() && $formMedia->isValid()) {
 
-            $file = $request->files->get('uploadedFile');
-            if ($file != null) {
-                $fileExtension = $file->getClientOriginalExtension();
-
-                $media->setExtension($fileExtension);
-
-                $picture = array_values($request->files->get('media_update'))[0];
-
-                $pictureName = $this->generateUniquePictureName();
-                $media->setPicture($pictureName);
-
                 $em->persist($media);
-                $em->flush();
-
-                // Move the file to the directory where medias are stored
-                try {
-                    $file->move('files/medias', $media->getId() . '.' . $fileExtension);
-
-                } catch (FileException $e) {
-                    $this->addFlash('danger', phpinfo());
-                    die();
-                }
-
-                if($picture != null) {
-                    // Move the file to the directory where pictures are stored
-                    try {
-
-                        $picture->move('files/pictures', $pictureName . '.jpg');
-                    } catch (FileException $e) {
-                        // ... handle exception if something happens during file upload
-                    }
-                }
+                
                 $em->flush();
                 $this->addFlash('success', "The media has been updated !");
 
                 return $this->redirectToRoute('media_list');
-            }
-            else
-            {
-                $this->addFlash('danger', "Vous devez remplir les champs nécessaires à la modification d'un média");
-                $this->redirectToRoute('media_create');
-            }
+
+
         }
 
         return $this->render(
@@ -247,37 +221,6 @@ class MediaController extends Controller
 
         return $this->redirectToRoute('account');
 
-    }
-
-    /**
-     * @Route("/media/update/{id}", name="media_update")
-     */
-    public function mediaUpdate(EntityManagerInterface $em, Request $request, $id=0)
-    {
-
-        $repo = $em->getRepository(Media::class);
-
-        $media = $repo->find($id);
-
-        $formMedia = $this->createForm(MediaType::class, $media);
-        $formMedia->handleRequest($request);
-
-        if($formMedia->isSubmitted() && $formMedia->isValid()){
-            $em->persist($media);
-            $em->flush();
-
-            $this->addFlash('success', "Media has been successfully updated");
-
-            return $this->redirectToRoute('media_list');
-
-        }
-
-
-        return $this->render('media/form.html.twig',
-            [
-                'form' => $formMedia->createView()
-            ]
-        );
     }
 
     /**
