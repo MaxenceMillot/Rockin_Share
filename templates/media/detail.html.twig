@@ -26,18 +26,14 @@
                     <div class="text-center card mt-5 col-md-12" style="width: 500px">
                         <h2 class="font-weight-bold">Author</h2>
                         <div><h3>{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
-                    </div>
-                    <div class="text-center card mt-2 col-md-12" style="width: 500px">
+                        <hr>
                         <h2 class="font-weight-bold">Creation Date</h2>
                         <div><h3 >{{ media.dateCreated|date("d/m/Y")}}</h3></div>
-                    </div>
-                    <div class="text-center card mt-2 col-md-12" style="width: 500px">
+                        <hr>
                         <h2 class="font-weight-bold">Description</h2>
                         <div><p>{{ media.description }}</p></div>
-                    </div>
-
-                    <div class="text-center card mt-2 col-md-12" style="width: 500px">
-                        <ul class="list-group mt-2 mb-3 liste-genres">
+                        <hr>
+                        <ul class="list-group liste-genres">
                             {% for genre in media.genre %}
                                 <li class="list-group-item">{{ genre.name }}</li>
                             {% endfor %}
@@ -86,7 +82,7 @@
             </div>
         {% elseif typeMedia == "Image" %}
             <div class="row">
-                <div class="col-md-6 card mx-auto text-center rounded mt-3 shadow">
+                <div class="col-md-6 card mx-auto text-center rounded mt-5 shadow">
                     <h1 class="my-2 patua ">{{ media.name }}</h1>
                     <img class="img-thumbnail rounded mx-auto d-block mb-3" src="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" type="image/{{ media.extension }}"/>
                 </div>
@@ -94,23 +90,20 @@
                     <div class="text-center card mt-5 col-md-12 bg-light shadow" style="width: 500px">
                         <h2>Author</h2>
                         <div><h3 class="font-weight-bold">{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3></div>
-                    </div>
-                    <div class="text-center card mt-2 col-md-12" style="width: 500px">
+                        <hr>
                         <h2 class="font-weight-bold">Creation Date</h2>
                         <div><h3 >{{ media.dateCreated|date("d/m/Y")}}</h3></div>
-                    </div>
-                    <div class="text-center card mt-2 col-md-12 bg-light shadow" style="width: 500px">
+                        <hr>
                         <h2>Description</h2>
                         <div><p>{{ media.description }}</p></div>
-                    </div>
-                    <div class="text-center card mt-2 col-md-12" style="width: 500px">
+                        <hr>
                         <ul class="list-group mt-2 mb-2 liste-genres">
                             {% for genre in media.genre %}
                                 <li class="list-group-item">{{ genre.name }}</li>
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="text-center mt-5 font-weight-bold ">
+                    <div class="text-center mt-2 font-weight-bold ">
                         <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success">Download</a>
                     </div>
 
