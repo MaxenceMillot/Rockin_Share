@@ -105,7 +105,6 @@ class AdminController extends Controller
         if($formUser->isSubmitted() && $formUser->isValid()){
             $isAdmin = $request->request->get("isAdmin");
 
-            /* TODO: change string to arrays */
             if($isAdmin){
                 $user->setRoles(['ROLE_ADMIN']);
             }else{
