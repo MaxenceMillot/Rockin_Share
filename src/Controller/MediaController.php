@@ -167,10 +167,10 @@ class MediaController extends Controller
         $genres = $media->getGenre();
         $genre = $genres[0];
 
-        $isPicture = true;
-        if (!file_exists($media->getPicture().'.jpg') )
+        $isPicture = false;
+        if (file_exists('files/pictures/'.$media->getPicture().'.jpg') )
         {
-            $isPicture = false;
+            $isPicture = true;
         }
 
         return $this->render('media/detail.html.twig',
