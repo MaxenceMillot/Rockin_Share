@@ -15,7 +15,12 @@
 
                 <div class="form-group">
                     <label for="uploadedFile">File</label>
-                    <input type="file" class="form-control-file" id="uploadedFile" name="uploadedFile" required="required">
+                    {% if edit is same as(true) %}
+                        <input type="file" class="form-control-file" id="uploadedFile" name="uploadedFile">
+                    {% else %}
+                        <input type="file" class="form-control-file" id="uploadedFile" name="uploadedFile" required="required">
+                    {% endif %}
+
                 </div>
 
                 {{ form_widget(form) }}

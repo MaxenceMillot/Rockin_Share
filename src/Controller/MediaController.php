@@ -128,6 +128,7 @@ class MediaController extends Controller
         $media->setUtilisateur($this->getUser());
         $media->setDateCreated( new \DateTime());
         $media->setExtension("");
+
         $formMedia->handleRequest($request);
         if ($formMedia->isSubmitted() && $formMedia->isValid()) {
 
@@ -137,7 +138,7 @@ class MediaController extends Controller
 
                 $media->setExtension($fileExtension);
 
-                $picture = array_values($request->files->get('media'))[0];
+                $picture = array_values($request->files->get('media_update'))[0];
 
                 $pictureName = $this->generateUniquePictureName();
                 $media->setPicture($pictureName);
@@ -164,13 +165,13 @@ class MediaController extends Controller
                     }
                 }
                 $em->flush();
-                $this->addFlash('success', "The media has been created !");
+                $this->addFlash('success', "The media has been updated !");
 
                 return $this->redirectToRoute('media_list');
             }
             else
             {
-                $this->addFlash('danger', "Vous devez remplir les champs nécessaires à la création d'un média");
+                $this->addFlash('danger', "Vous devez remplir les champs nécessaires à la modification d'un média");
                 $this->redirectToRoute('media_create');
             }
         }
