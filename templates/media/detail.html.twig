@@ -12,9 +12,9 @@
                     </h1>
                     <picture>
                         {% if isPicture %}
-                            <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('files/pictures/'~ media.picture ~'.jpg') }}" alt="{{ media.name }}">
+                            <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="300" src="{{ asset('files/pictures/'~ media.picture ~'.jpg') }}" alt="{{ media.name }}">
                         {% else %}
-                            <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="400" src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
+                            <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="300" src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
                         {% endif %}
                     </picture>
                     <audio controls="controls" class="mx-auto">
@@ -49,7 +49,7 @@
 
         {% elseif typeMedia == "Film" %}
 
-            <div class="row">
+            <div class="row mb-3">
                 <div class="col-md-9 text-center card mx-auto mt-3 ">
                     <h1 class="my-2 patua">
                         {{ media.name}}
@@ -77,7 +77,7 @@
                     <hr>
                     <h2 class="text-left font-weight-bold">Description :</h2>
                     <p class="text-left">{{ media.description }}</p>
-                    <div class="text-center mt-1 font-weight-bold ">
+                    <div class="text-center mt-1 font-weight-bold pb-3">
                         <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success ">Download</a>
                     </div>
                 </div>
@@ -115,13 +115,22 @@
             </div>
         {% else %}
             <div class="row">
-                <div class="col-md-6 mx-auto  card bg-light shadow text-center mt-5 pb-3 font-weight-bold">
-                    <h1 class="patua">{{ media.name ~'.'~ media.extension }}</h1>
-                    <h3 class="text-left">Description : </h3>
+                <div class="col-md-8 mx-auto  card bg-light shadow text-center mt-5 pb-3 font-weight-bold">
+                    <h1 class="patua mt-3">{{ media.name }}</h1>
+                    <picture>
+                        {% if isPicture %}
+                            <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="300" src="{{ asset('files/pictures/'~ media.picture ~'.jpg') }}" alt="{{ media.name }}">
+                        {% else %}
+                            <img class="img-thumbnail rounded mx-auto d-block mb-3" height="400" width="300" src="{{ asset('img/Rocking_chair_logo.png') }}" alt="{{ media.name }}">
+                        {% endif %}
+                    </picture>
+                    <h3 class="text-left"><u>Description :</u></h3>
                     <p class="text-left">{{ media.description }}</p>
-                    <h3 class="text-left"><b>Auteur : </b>{{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3>
-                    <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success">Télécharger</a>
-
+                    <hr>
+                    <h3 class="text-left"><u>Auteur :</u>    {{ media.utilisateur.firstname ~' '~ media.utilisateur.lastname }}</h3>
+                    <div class="text-center mx-auto col-md-4 mt-4">
+                        <a href="{{ asset('files/medias/'~ media.id ~'.'~media.extension) }}" download="{{ media.name ~'.'~ media.extension }}" class="btn shadow btn-lg btn-success">Télécharger</a>
+                    </div>
                 </div>
             </div>
         {% endif %}

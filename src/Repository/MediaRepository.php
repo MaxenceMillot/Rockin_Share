@@ -23,9 +23,7 @@ class MediaRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('m')
             ->innerJoin('m.genres','g')
             ->innerJoin('g.typeMedia','t')
-            ->addOrderBy('g.typeMedia', 'ASC')
-            ->addOrderBy('g.name', 'ASC')
-            ->addOrderBy('m.dateCreated', 'ASC')
+            ->addOrderBy('m.dateCreated', 'DESC')
             ->getQuery()
             ->getResult()
             ;
