@@ -71,11 +71,9 @@
         <img  src="{{ asset('img/arrow-top.svg') }}" width="60" alt="go top">
     </span>
 
-{% endblock %}
-
-{% block javascript %}
-<script>
-$( ".confirm-delete-btn" ).click(function() {
+    {% block javascript %}
+    <script>
+    $( ".confirm-delete-btn" ).click(function() {
         var link = $( this );
         var id = link.data("id");
         $("#confirm-delete-link").attr("href", "{{ path('type_delete') }}/"+id);
@@ -83,3 +81,6 @@ $( ".confirm-delete-btn" ).click(function() {
     });
 </script>
 {% endblock %}
+
+{% endblock %}
+

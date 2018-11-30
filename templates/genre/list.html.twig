@@ -113,15 +113,16 @@
         <img  src="{{ asset('img/arrow-top.svg') }}" width="60" alt="go top">
     </span>
 
-{% endblock %}
-
 {% block javascript %}
-<script>
-$( ".confirm-delete-btn" ).click(function() {
-    var link = $( this );
-    var id = link.data("id");
-    $("#confirm-delete-link").attr("href", "{{ path('genre_delete') }}/"+id);
+    <script>
+    $( ".confirm-delete-btn" ).click(function() {
+        var link = $( this );
+        var id = link.data("id");
+        $("#confirm-delete-link").attr("href", "{{ path('genre_delete') }}/"+id);
         console.log(id);
     });
 </script>
 {% endblock %}
+
+{% endblock %}
+

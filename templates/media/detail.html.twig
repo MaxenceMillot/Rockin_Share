@@ -34,9 +34,9 @@
                         <div><p>{{ media.description }}</p></div>
                         <hr>
                         <div class="container mb-3">
-                            <div class="row">
+                            <div class="row mx-auto">
                                 {% for genre in media.genre %}
-                                    <div class="col-md-6 badge badge-info">{{ genre.name }}</div>
+                                    <div class="col-md-5 badge badge-info m-2">{{ genre.name }}</div>
                                 {% endfor %}
                             </div>
                         </div>
